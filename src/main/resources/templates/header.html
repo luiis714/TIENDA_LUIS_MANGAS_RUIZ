@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title></title>
 </head>
 <body>
+	<div id="info-usuario">
+		<div>
+			Fecha y hora inicio: ${sessionScope.fechaLog}
+			<div id="btns" align="right">
+				<ul>
 
+					<li><a method="post"
+						href="<%=request.getContextPath()%>/Menu${sessionScope.rol.getRol()}.jsp">
+							<< Volver</a></li>
+					<li><a method="post"
+						href="<%=request.getContextPath()%>/Login.jsp">X Cerrar sesión</a></li>
+				</ul>
+			</div>
+			<div>
+				<div>Rol: ${sessionScope.rol.getRol()}</div>
+				<div>Usuario: ${sessionScope.usuario.getNombre()}
+					${sessionScope.usuario.getApellido1()}
+					${sessionScope.usuario.getApellido2()}</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>

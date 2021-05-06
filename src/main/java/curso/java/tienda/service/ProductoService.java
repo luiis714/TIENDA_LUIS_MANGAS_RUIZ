@@ -14,10 +14,9 @@ public class ProductoService {
 	@Autowired
 	private ProductoRepository repository;
 	
-	public ArrayList<Producto> listadoProductos(){
+	public Iterable<Producto> listadoProductos(){
 		Iterable <Producto> it = repository.findAll();
-		ArrayList<Producto> lista = (ArrayList<Producto>) it;
 		
-		return lista;
+		return it;
 	}
 }
