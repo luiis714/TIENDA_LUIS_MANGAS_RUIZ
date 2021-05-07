@@ -32,7 +32,7 @@ public class LoginController {
 			Usuario usuario = uS.devuelveUsuarioEmail(email);
 			session.setAttribute("usuario", usuario);
 			
-			return "redirect:/menu";
+			return "redirect:/tienda_luis_mangas_ruiz";
 		}
 		else {
 			return "login";

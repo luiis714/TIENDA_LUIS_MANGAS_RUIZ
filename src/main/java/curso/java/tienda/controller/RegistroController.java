@@ -1,5 +1,7 @@
 package curso.java.tienda.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +26,13 @@ public class RegistroController {
 	}
 	
 	@PostMapping("/nuevo")
-	public String nuevo(Model model, @RequestParam String nombre, @RequestParam String apellido1, @RequestParam String apellido2, @RequestParam String email, @RequestParam String clave) {
+	public String nuevo(HttpSession session, Model model, @RequestParam String nombre, @RequestParam String apellido1, @RequestParam String apellido2, @RequestParam String email, @RequestParam String clave) {
 		
 			uS.insertaUsuario(nombre, apellido1, apellido2, email, clave);
 			
-			return "redirect:/menu";
-
+			Usuario usuario = uS.devuelveUsuarioEmail(email);
+			session.setAttribute("usuario", usuario);
+			
+			return "redirect:/tienda_luis_mangas_ruiz";
 	}
 }
