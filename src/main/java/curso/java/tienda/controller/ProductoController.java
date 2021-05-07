@@ -10,14 +10,14 @@ import curso.java.tienda.repository.ProductoRepository;
 import curso.java.tienda.service.ProductoService;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/tienda_luis_mangas_ruiz")
 public class ProductoController {
 	
 	@Autowired
 	private ProductoService ps;
 	
 	@GetMapping("")
-	public String portada(Model model) {
+	public String inicio(Model model) {
 		model.addAttribute("listaProductos", ps.listadoProductos());
 		
 		return "producto/lista";

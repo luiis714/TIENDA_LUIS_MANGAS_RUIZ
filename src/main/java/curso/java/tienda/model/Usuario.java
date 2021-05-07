@@ -1,5 +1,6 @@
 package curso.java.tienda.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ public class Usuario {
 	@GeneratedValue
 	private Integer id;
 	private Integer idRol;
+	@Column(unique = true)
 	private String email;
 	private String clave;
 	private String nombre;
@@ -25,6 +27,16 @@ public class Usuario {
 	private String dni;
 
 	public Usuario() {
+	}
+
+	/** Contructor minimo usado para el registro */
+	public Usuario(Integer idRol, String email, String clave, String nombre, String apellido1, String apellido2) {
+		this.idRol = idRol;
+		this.email = email;
+		this.clave = clave;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
 	}
 
 	public Usuario(Integer idRol, String email, String clave, String nombre, String apellido1, String apellido2,

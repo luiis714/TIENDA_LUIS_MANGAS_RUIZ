@@ -25,4 +25,12 @@ public class UsuarioService {
 		else
 			return false;
 	}
+	
+	public void insertaUsuario(String nombre, String apellido1, String apellido2, String email, String clave) {
+		//Lo creo como id rol 3 ya que es el cliente
+		Usuario usuario = new Usuario(3, email, clave, nombre, apellido1, apellido2);
+		
+		//Guardo en la BBDD
+		repository.save(usuario);
+	}
 }
