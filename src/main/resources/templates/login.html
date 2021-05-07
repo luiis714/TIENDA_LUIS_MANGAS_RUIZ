@@ -20,11 +20,9 @@
 								<div class="col-lg-6">
 									<div class="p-5">
 										<div class="mb-5">
-											<h3 class="h4 font-weight-bold text-theme">Inicio sesión</h3>
+											<h3 class="h4 font-weight-bold text-theme">Iniciar sesión</h3>
 										</div>
 										<h6 class="h5 mb-0">¡Bienvenido de nuevo!</h6>
-										<p class="text-muted mt-2 mb-5">Mete el email y la
-											contraseña para acceder al panel de administrador</p>
 										<form th:action="@{/login/comprueba}" method="post">
 											<div class="form-group">
 												<label for="exampleInputEmail1">Email</label> <input
@@ -58,13 +56,10 @@
 					</div>
 					<!-- end card -->
 	
-					<p class="text-muted text-center mt-3 mb-0">
-						¿No tienes cuenta? <a href="register.html"
-							class="text-primary ml-1">registrar</a>
+					<p class="text-muted text-center mt-3 mb-0">¿No tienes cuenta? <a th:href="@{/registro}"
+							class="text-primary ml-1">Registrar</a>
 					</p>
-	
 					<!-- end row -->
-	
 				</div>
 				<!-- end col -->
 			</div>

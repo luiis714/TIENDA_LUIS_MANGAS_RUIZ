@@ -12,28 +12,23 @@ import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.UsuarioService;
 
 @Controller
-@RequestMapping("/login")
-public class LoginController {
-	
+@RequestMapping("/registro")
+public class RegistroController {
+
 	@Autowired
 	private UsuarioService uS;
 	
 	@GetMapping("")
 	public String login(){
-		return "login";
+		return "registro";
 	}
 	
-	@PostMapping("/comprueba")
-	public String comprueba(Model model, @RequestParam String email, @RequestParam String clave) {
+	@PostMapping("/nuevo")
+	public String nuevo(Model model, @RequestParam String nombre, @RequestParam String apellido1, @RequestParam String apellido2, @RequestParam String email, @RequestParam String clave) {
 		
-		if(uS.compruebaUsuario(email, clave)) {
-			Usuario usuario = uS.devuelveUsuarioEmail(email);
+			uS.insertaUsuario(nombre, apellido1, apellido2, email, clave);
 			
 			return "redirect:/menu";
-		}
-		else {
-			return "login";
-		}
+
 	}
-	
 }
