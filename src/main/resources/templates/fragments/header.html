@@ -13,7 +13,7 @@
 	<header class="header-area overlay" th:fragment="header">
 		<nav class="navbar navbar-expand-md navbar-dark">
 			<div class="container">
-				<a href="" class="navbar-brand">Luis.com</a>
+				<a th:href="@{/luis_mangas_ruiz}" class="navbar-brand">Luis.com</a>
 
 				<button type="button" class="navbar-toggler collapsed"
 					data-toggle="collapse" data-target="#main-nav">
@@ -24,16 +24,25 @@
 				<div id="main-nav" class="collapse navbar-collapse">
 					<ul class="navbar-nav ml-auto">
 						<li><a href="" class="nav-item nav-link active">Productos</a></li>
-						<li class="dropdown"><a href="" class="nav-item nav-link active"
-							data-toggle="dropdown">Categorias</a>
+						<li class="dropdown"><a href=""
+							class="nav-item nav-link active" data-toggle="dropdown">Categorias</a>
 							<div class="dropdown-menu">
-								<a href="" class="dropdown-item">Tecnología</a> 
-								<a href="#" class="dropdown-item">Moda</a>
-								<a href="" class="dropdown-item">Libros</a>
-							</div>
-						</li>
-						<li><a th:href="@{/registro}" class="nav-item nav-link active ">Registrarse</a></li>
-						<li><a th:href="@{/login}" class="nav-item nav-link active">Iniciar sesión</a></li>
+								<a href="" class="dropdown-item">Tecnología</a> <a href="#"
+									class="dropdown-item">Moda</a> <a href="" class="dropdown-item">Libros</a>
+							</div></li>
+						<div th:if="${session.usuario == null}">
+							<li><a th:href="@{/registro}"
+								class="nav-item nav-link active ">Registrarse</a></li>
+						</div>
+						<div th:if="${session.usuario == null}">
+							<li><a th:href="@{/login}" class="nav-item nav-link active">Iniciar
+									sesión</a></li>
+						</div>
+						<div th:if="${session.usuario != null}">
+							<li><a th:href="@{/menu}"
+								class="nav-item nav-link active ">Cerrar sesión</a></li>
+						</div>
+
 					</ul>
 				</div>
 			</div>
