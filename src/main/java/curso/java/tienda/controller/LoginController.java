@@ -18,6 +18,8 @@ public class LoginController {
 	
 	@PostMapping("/comprueba")
 	public String comprueba(Model model, @RequestParam String email, @RequestParam String clave) {
+		Usuario usuario = 
+		
 		
 		return "redirect:/menu";
 	}
