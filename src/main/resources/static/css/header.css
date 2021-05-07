@@ -5,7 +5,7 @@ html {
 }
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 400;
 }
 h1 {
@@ -25,15 +25,15 @@ p {
 }
 .button-primary {
   position: relative;
-  background-color: #c0ca33;
-  color: #fff;
+  background-color: #30ce84;
+  color: #ffffff;
   font-size: 1.8rem;
   font-weight: 700;
-  transition: color 0.3s ease-in;
+  transition: color 0.2s ease-in;
   z-index: 1;
 }
 .button-primary:hover {
-  color: #c0ca33;
+  color: #30ce84;
   text-decoration: none;
 }
 .button-primary::after {
@@ -43,7 +43,7 @@ p {
   left: 0;
   right: 0;
   top: 0;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 4px;
   opacity: 0;
   -webkit-transform: scaleX(0.8);
@@ -69,7 +69,7 @@ p {
 }
 .header-area {
   position: relative;
-  height: 10vh;
+  height: 100%;
   background: #5bc0de;
   background-attachment: fixed;
   background-position: center center;
@@ -117,7 +117,7 @@ p {
   left: 15px;
   right: 15px;
   height: 2px;
-  background-color: #fff;
+  background-color: #ffffff;
   opacity: 0;
   -webkit-transform: translateY(-1px);
   -ms-transform: translateY(-1px);
@@ -151,20 +151,20 @@ p {
 }
 .navbar-dark .navbar-nav .nav-link {
   position: relative;
-  color: #fff;
+  color: #ffffff;
   font-size: 1.6rem;
 }
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
-  color: #fff;
+  color: #ffffff;
 }
 .navbar .dropdown-menu {
   padding: 0;
-  background-color: rgba(0, 0, 0, .9);
+  background-color: #000000dc;
 }
 .navbar .dropdown-menu .dropdown-item {
   position: relative;
   padding: 10px 20px;
-  color: #fff;
+  color: #ffffff;
   font-size: 1.4rem;
   border-bottom: 1px solid rgba(255, 255, 255, .1);
   transition: color 0.2s ease-in;
@@ -174,7 +174,7 @@ p {
 }
 .navbar .dropdown-menu .dropdown-item:hover {
   background: transparent;
-  color: #c0ca33;
+  color: #30ce84;
 }
 .navbar .dropdown-menu .dropdown-item::before {
   content: '';
@@ -183,7 +183,7 @@ p {
   left: 0;
   top: 0;
   width: 5px;
-  background-color: #c0ca33;
+  background-color: #30ce84;
   opacity: 0;
   transition: opacity 0.2s ease-in;
 }
@@ -194,13 +194,13 @@ p {
   position: fixed;
   -webkit-animation: navbar-animation 0.6s;
   animation: navbar-animation 0.6s;
-  background-color: rgba(0, 0, 0, .9);
+  background-color: #000000dc;
 }
 .navbar.fixed-top.navbar-dark .navbar-nav .nav-link.active {
-  color: #c0ca33;
+  color: #30ce84;
 }
 .navbar.fixed-top.navbar-dark .navbar-nav .nav-link::after {
-  background-color: #c0ca33;
+  background-color: #30ce84;
 }
 .content {
   padding: 120px 0;
@@ -225,7 +225,7 @@ p {
     font-size: 5rem;
   }
   .banner p {
-    font-size: 2rem;
+    font-size: 3rem;
   }
   .navbar-dark .navbar-nav .nav-link {
     padding: 23px 15px;
@@ -237,7 +237,7 @@ p {
     left: 30%;
     right: 30%;
     height: 1px;
-    background-color: #fff;
+    background-color: #ffffff;
     -webkit-transform: scaleX(0);
     -ms-transform: scaleX(0);
     transform: scaleX(0);
