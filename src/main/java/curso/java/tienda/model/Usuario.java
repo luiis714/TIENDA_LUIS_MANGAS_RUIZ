@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuarios")
@@ -13,17 +16,34 @@ public class Usuario {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	private Integer idRol;
+	
+	@Email(message="Debe ser una dirección de correo electrónico con formato correcto")
 	@Column(unique = true)
 	private String email;
+	
+	@NotBlank(message="El contraseña es obligatorio")
 	private String clave;
+	
+	@NotBlank(message="El nombre es obligatorio")
 	private String nombre;
+	
+	@NotBlank(message="Los apellidos son obligatorios")
 	private String apellido1;
+	
+	@NotBlank(message="Los apellidos son obligatorios")
 	private String apellido2;
+	
 	private String direccion;
+	
 	private String localidad;
+	
 	private String provincia;
+	
+	@Size(min=9, max=9, message="El teléfono debe tener 9 dígitos")
 	private String telefono;
+	
 	private String dni;
 
 	public Usuario() {

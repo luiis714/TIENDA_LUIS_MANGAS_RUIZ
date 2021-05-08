@@ -28,6 +28,7 @@ public class LoginController {
 	@PostMapping("/comprueba")
 	public String comprueba(HttpSession session, Model model, @RequestParam String email, @RequestParam String clave) {
 		
+		//Comprueba el email y la clave y si son correctos inicia sesión
 		if(uS.compruebaUsuario(email, clave)) {
 			Usuario usuario = uS.devuelveUsuarioEmail(email);
 			session.setAttribute("usuario", usuario);

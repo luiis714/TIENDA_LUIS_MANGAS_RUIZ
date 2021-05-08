@@ -1,11 +1,14 @@
 package curso.java.tienda.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,18 +24,28 @@ public class RegistroController {
 	private UsuarioService uS;
 	
 	@GetMapping("")
-	public String login(){
+	public String registro(Model model){
+		model.addAttribute("usuario", new Usuario());
+		
 		return "registro";
 	}
 	
 	@PostMapping("/nuevo")
-	public String nuevo(HttpSession session, Model model, @RequestParam String nombre, @RequestParam String apellido1, @RequestParam String apellido2, @RequestParam String email, @RequestParam String clave) {
+	public String nuevo(HttpSession session, Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
 		
-			uS.insertaUsuario(nombre, apellido1, apellido2, email, clave);
+//			uS.insertaUsuario(nombre, apellido1, apellido2, email, clave);
 			
-			Usuario usuario = uS.devuelveUsuarioEmail(email);
-			session.setAttribute("usuario", usuario);
+//			Usuario usuario = uS.devuelveUsuarioEmail(email);
+//			session.setAttribute("usuario", usuario);
 			
-			return "redirect:/tienda_luis_mangas_ruiz";
+		if(bindingResult.hasErrors()) {
+			return "/registro";
+		}
+		else {
+			uS.insertaUsuario(usuario);
+			return "redirect:/";
+		}
+		
+			
 	}
 }

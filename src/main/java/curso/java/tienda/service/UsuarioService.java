@@ -1,5 +1,7 @@
 package curso.java.tienda.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,18 @@ public class UsuarioService {
 		
 		//Guardo en la BBDD
 		repository.save(usuario);
+	}
+	
+	public void insertaUsuario(Usuario usuario) {
+		usuario.setIdRol(3);
+		//Guardo en la BBDD
+		repository.save(usuario);
+	}
+	
+	public void cerrarSesion(HttpSession session) {
+		
+		if(session != null) {
+			session.invalidate();
+		}
 	}
 }

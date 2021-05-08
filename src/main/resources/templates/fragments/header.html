@@ -39,13 +39,11 @@
 									sesión</a></li>
 						</div>
 						<div th:if="${session.usuario != null}">
-							<li class="dropdown"><a href=""
-								class="nav-item nav-link active" data-toggle="dropdown">Perfil</a>
+							<li class="dropdown"><a href="" class="nav-item nav-link active fa fa-user-circle-o fa-2x" data-toggle="dropdown">Perfil</a>
 								<div class="dropdown-menu">
 									<a href="" class="dropdown-item">Editar perfil</a> 
-									<a href="#"
-										class="dropdown-item">Ajustes</a> 
-										<a href="" class="dropdown-item">Cerrar sesión</a>
+									<a href="#" class="dropdown-item">Ajustes</a> 
+									<a th:href="@{usuario/cerrar_sesion}" method="post" class="dropdown-item">Cerrar sesión</a>
 								</div></li>
 						</div>
 

@@ -9,8 +9,8 @@ CREATE TABLE `productos` (
   `descripcion` varchar(255),
   `precio` double,
   `stock` int,
-  `fecha_alta` timestamp,
-  `fecha_baja` timestamp,
+  `fecha_alta` date,
+  `fecha_baja` date,
   `impuesto` float
 );
 
