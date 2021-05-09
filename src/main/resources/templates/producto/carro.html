@@ -16,7 +16,7 @@
 	<div class="shop-items">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-3 col-sm-6" th:each="producto : ${listaProductos}">
+				<div class="col-md-3 col-sm-6" th:each="producto : ${lista}">
 					<!-- Restaurant Item -->
 					<div class="item">
 						<!-- Item's image -->
@@ -32,11 +32,7 @@
 						</div>
 						<!-- add to cart btn -->
 						<div class="ecom bg-lblue">
-							<form th:object="${producto}" th:href="@{/tienda_luis_mangas_ruiz/insertar_carro}">
-								<a class="btn" type="submit">Añadir al carro</a>
-								<input type="submit" text="aaaaa">
-							</form>
-							
+							<a class="btn" >Añadir al carro</a>
 						</div>
 					</div>
 				</div>
