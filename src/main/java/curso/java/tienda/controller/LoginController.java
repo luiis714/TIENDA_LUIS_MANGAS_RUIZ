@@ -1,5 +1,7 @@
 package curso.java.tienda.controller;
 
+//package curso.java.tienda.controller;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class LoginController {
 			return "redirect:/tienda_luis_mangas_ruiz";
 		}
 		else {
-			return "login";
+			return "/login";
 		}
 	}
 	

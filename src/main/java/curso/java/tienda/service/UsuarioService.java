@@ -2,6 +2,7 @@ package curso.java.tienda.service;
 
 import javax.servlet.http.HttpSession;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,11 @@ public class UsuarioService {
 
 	public boolean compruebaUsuario(String email, String clave) {
 		Usuario usuario = devuelveUsuarioEmail(email);
+		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 		
 		//Si el usuario no es null y su clave es la misma que la que de ha introducido
-		if((usuario != null) && (usuario.getClave().equals(clave)))
+		//Compruebo la contraseña encriptada
+		if((usuario != null) && (passwordEncryptor.checkPassword(clave, usuario.getClave())))
 			return true;
 		else
 			return false;
@@ -37,7 +40,13 @@ public class UsuarioService {
 	}
 	
 	public void insertaUsuario(Usuario usuario) {
+		//Rol 3 porque son clientes
 		usuario.setIdRol(3);
+		
+		//Encripto la contraseña para guardarla en la BBDD
+		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		usuario.setClave(passwordEncryptor.encryptPassword(usuario.getClave()));//Encripto la contraseña
+		
 		//Guardo en la BBDD
 		repository.save(usuario);
 	}

@@ -31,18 +31,14 @@ public class RegistroController {
 	}
 	
 	@PostMapping("/nuevo")
-	public String nuevo(HttpSession session, Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
-		
-//			uS.insertaUsuario(nombre, apellido1, apellido2, email, clave);
-			
-//			Usuario usuario = uS.devuelveUsuarioEmail(email);
-//			session.setAttribute("usuario", usuario);
-			
+	public String nuevo(HttpSession session, Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {			
 		if(bindingResult.hasErrors()) {
 			return "/registro";
 		}
 		else {
 			uS.insertaUsuario(usuario);
+			session.setAttribute("usuario", usuario);//Pone el usuario en la sesión
+			
 			return "redirect:/";
 		}
 		

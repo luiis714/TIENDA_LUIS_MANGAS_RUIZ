@@ -24,12 +24,13 @@
 				<div id="main-nav" class="collapse navbar-collapse">
 					<ul class="navbar-nav ml-auto">
 						<li><a href="" class="nav-item nav-link active">Productos</a></li>
-						<li class="dropdown"><a href=""
-							class="nav-item nav-link active" data-toggle="dropdown">Categorias</a>
-							<div class="dropdown-menu">
-								<a href="" class="dropdown-item">Tecnología</a> <a href="#"
-									class="dropdown-item">Moda</a> <a href="" class="dropdown-item">Libros</a>
-							</div></li>
+						<li class="dropdown"><a href="" class="nav-item nav-link active" data-toggle="dropdown">Categorias</a>
+							<div  class="dropdown-menu">
+								<div th:each="categoria : ${session.listaCategorias}">
+									<a th:href="@{/categoria/}+${categoria.nombre.toLowerCase()}" class="dropdown-item" th:text="${categoria.nombre}">default</a>
+								</div>
+							</div>
+						</li>
 						<div th:if="${session.usuario == null}">
 							<li><a th:href="@{/registro}"
 								class="nav-item nav-link active ">Registrarse</a></li>

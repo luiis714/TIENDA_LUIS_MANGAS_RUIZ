@@ -40,6 +40,7 @@ public class UsuarioController {
 		
 		uS.cerrarSesion(session);
 		
-		return "redirect:/tienda_luis_mangas_ruiz";
+		return "redirect:/";
+//		return "redirect:/tienda_luis_mangas_ruiz";
 	}
 }
