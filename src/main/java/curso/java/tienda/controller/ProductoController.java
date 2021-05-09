@@ -26,7 +26,6 @@ public class ProductoController {
 		
 		model.addAttribute("listaProductos", ps.listadoProductos());
 		session.setAttribute("listaCategorias", cs.listadoCategorias());
-//		model.addAttribute("listaCategorias", cs.listadoCategorias());
 		
 		return "producto/lista";
 	}

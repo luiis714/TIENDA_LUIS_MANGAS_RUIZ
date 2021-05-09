@@ -15,5 +15,9 @@ public class CategoriaService {
 	public Iterable<Categoria> listadoCategorias(){
 		return repository.findAll();
 	}
+
+	public Categoria getCategoriaName(String nombre) {
+		return repository.findByNombre(nombre);
+	}
 	
 }
