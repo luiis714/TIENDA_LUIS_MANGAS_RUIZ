@@ -7,7 +7,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet" th:href="@{/css/list-productos.css}">
+<link rel="stylesheet" th:href="@{/css/producto/list-productos.css}">
 
 </head>
 <body>
@@ -20,15 +20,15 @@
 					<!-- Restaurant Item -->
 					<div class="item">
 						<!-- Item's image -->
-						<img class="img-responsive" th:src="@{img/producto1.jpg}" alt="">
+						<img class="img-responsive" th:src="@{/img/producto1.jpg}" alt="">
 						<!-- Item details -->
 						<div class="item-dtls">
 							<!-- product title -->
 							<h4>
-								<a href="#" th:text="${pro.nombre}">Lorem product</a>
+								<a th:href="@{/tienda_luis_mangas_ruiz/detalle}" th:text="${pro.nombre}">Lorem product</a>
 							</h4>
 							<!-- price -->
-							<span class="price lblue" th:text="${pro.precio}">$00.00</span>
+							<span class="price lblue" th:text="${pro.precio}+€">$00.00</span>
 						</div>
 						<!-- add to cart btn -->
 						<div class="ecom bg-lblue">

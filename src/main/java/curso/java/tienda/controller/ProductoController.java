@@ -29,4 +29,13 @@ public class ProductoController {
 		
 		return "producto/lista";
 	}
+	
+	@GetMapping("/detalle")
+	public String detalle(Model model,HttpSession session) {
+		
+		model.addAttribute("listaProductos", ps.listadoProductos());
+		session.setAttribute("listaCategorias", cs.listadoCategorias());
+		
+		return "producto/detalle";
+	}
 }
