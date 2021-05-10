@@ -27,7 +27,7 @@ public class CategoriaController {
 		Categoria categoria = cs.getCategoriaName("Libros");
 		model.addAttribute("listaProductos", ps.listadoProductosCategoria(categoria.getId()));
 		
-		return "categoria/lista";
+		return "producto/lista";
 	}
 	
 	@GetMapping("/tecnologia")

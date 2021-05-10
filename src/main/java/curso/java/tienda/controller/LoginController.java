@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.model.Usuario;
+import curso.java.tienda.service.OpcionMenuService;
 import curso.java.tienda.service.UsuarioService;
 
 @Controller
@@ -21,6 +22,8 @@ public class LoginController {
 	
 	@Autowired
 	private UsuarioService uS;
+	@Autowired
+	private OpcionMenuService oms;
 	
 	@GetMapping("")
 	public String login(){
@@ -34,8 +37,10 @@ public class LoginController {
 		if(uS.compruebaUsuario(email, clave)) {
 			Usuario usuario = uS.devuelveUsuarioEmail(email);
 			session.setAttribute("usuario", usuario);
+			//Meto las opciones del menu
+			session.setAttribute("opcionesMenu", oms.listadoOpcionesIdRol(usuario.getIdRol()));
 			
-			return "redirect:/tienda_luis_mangas_ruiz";
+			return "redirect:/";
 		}
 		else {
 			return "/login";

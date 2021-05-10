@@ -13,7 +13,7 @@
 	<header class="header-area overlay" th:fragment="header">
 		<nav class="navbar navbar-expand-md navbar-dark">
 			<div class="container">
-				<a th:href="@{/tienda_luis_mangas_ruiz}" class="navbar-brand">Luis.com</a>
+				<a th:href="@{/}" class="navbar-brand">Luis.com</a>
 
 				<button type="button" class="navbar-toggler collapsed"
 					data-toggle="collapse" data-target="#main-nav">
@@ -26,67 +26,54 @@
 						<div class="card search-form">
 							<div class="card-body p-0">
 								<form id="search-form">
-											<div class="row no-gutters">
-												<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-													<select class="form-control" id="exampleFormControlSelect1">
-														<option>Nombre</option>
-														<option>Nombre</option>
-														<option>Nombre</option>
-													</select>
-												</div>
-												<div class="col-lg-8 col-md-6 col-sm-12 p-0">
-													<input type="text" placeholder="Buscar..." class="form-control" id="buscar" name="buscar">
-												</div>
-												<div class="col-lg-1 col-md-3 col-sm-12 p-0">
-													<button type="submit" class="btn btn-base">
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-													</button>
-												</div>
-											</div>
-										
-									
+									<div class="row no-gutters">
+										<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+											<select class="form-control" id="exampleFormControlSelect1">
+												<option>Nombre</option>
+												<option>Nombre</option>
+												<option>Nombre</option>
+											</select>
+										</div>
+										<div class="col-lg-8 col-md-6 col-sm-12 p-0">
+											<input type="text" placeholder="Buscar..." class="form-control" id="buscar" name="buscar">
+										</div>
+										<div class="col-lg-1 col-md-3 col-sm-12 p-0">
+											<button type="submit" class="btn btn-base">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+											</button>
+										</div>
+									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-				</div>
 
-							
 				<div id="main-nav" class="collapse navbar-collapse">
-					<ul class="navbar-nav ml-auto">
-						<li><a href="" class="nav-item nav-link active">Productos</a></li>
-						<li class="dropdown"><a href="" class="nav-item nav-link active" data-toggle="dropdown">Categorias</a>
-							<div  class="dropdown-menu">
-								<a th:href="@{/}" class="dropdown-item">Todos los productos</a>
-								<div th:each="categoria : ${session.listaCategorias}">
-									<a th:href="@{/categoria/}+${categoria.nombre.toLowerCase()}" class="dropdown-item" th:text="${categoria.nombre}">default</a>
-								</div>
-							</div>
-						</li>
-						<div th:if="${session.usuario == null}">
-							<li>
-								<a th:href="@{/registro}" class="nav-item nav-link active ">Registrarse</a>
-							</li>
-						</div>
-						<div th:if="${session.usuario == null}">
-							<li>
-								<a th:href="@{/login}" class="nav-item nav-link active">Iniciar sesión</a>
-							</li>
-						</div>
-						<div th:if="${session.usuario != null}">
-							<li class="dropdown">
-								<a href="" class="nav-item nav-link active" data-toggle="dropdown" th:text="${session.usuario.email}">Perfil</a>
+					<ul class="navbar-nav ml-auto" th:each="opcion : ${session.opcionesMenu}">
+						<div th:if="${opcion.opcion} == 'Categorias'">
+							<li class="dropdown"><a class="nav-item nav-link active" data-toggle="dropdown" th:text="${opcion.opcion}">default</a>
 								<div class="dropdown-menu">
-									<a href="" class="dropdown-item">Editar perfil</a> 
+									<a th:href="@{/}" class="dropdown-item">Todos los productos</a>
+									<div th:each="categoria : ${session.listaCategorias}">
+										<a th:href="@{/categoria/}+${categoria.nombre.toLowerCase()}" class="dropdown-item" th:text="${categoria.nombre}">default</a>
+									</div>
+								</div>
+								
+							</li>
+						</div>
+						<div th:if="${opcion.opcion} == 'Perfil'">
+							<li class="dropdown"><a class="nav-item nav-link active" data-toggle="dropdown" th:text="${session.usuario.email}">default</a>
+								<div class="dropdown-menu">
+									<a href="" class="dropdown-item">Ver perfil</a>
+									<a th:if="${session.usuario.idRol} == 3" href="" class="dropdown-item">Pedidos</a> 
 									<a href="#" class="dropdown-item">Ajustes</a> 
 									<a th:href="@{/usuario/cerrar_sesion}" method="post" class="dropdown-item">Cerrar sesión</a>
 								</div>
 							</li>
 						</div>
-						<li>
-							<a th:href="@{/tienda_luis_mangas_ruiz/carro}" class="nav-item nav-link active">Carro</a>
-						</li>
-
+						<div th:unless="${opcion.opcion} == 'Perfil' OR ${opcion.opcion} == 'Categorias'">
+							<li><a class="nav-item nav-link active" th:href="@{${opcion.urlOpcion}}" th:text="${opcion.opcion}"></a></li>
+						</div>
 					</ul>
 				</div>
 			</div>

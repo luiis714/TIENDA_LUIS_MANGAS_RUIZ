@@ -15,6 +15,7 @@ public class Producto {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	@Column(name = "id_categoria")
 	private Integer idCategoria;
 	private String nombre;

@@ -25,16 +25,15 @@
 						<div class="item-dtls">
 							<!-- product title -->
 							<h4>
-								<a th:href="@{/tienda_luis_mangas_ruiz/detalle}" th:text="${producto.nombre}">Lorem product</a>
+								<a th:href="@{/detalle}" th:text="${producto.nombre}">Lorem product</a>
 							</h4>
 							<!-- price -->
 							<span class="price lblue" th:text="${producto.precio}+€">$00.00</span>
 						</div>
 						<!-- add to cart btn -->
 						<div class="ecom bg-lblue">
-							<form th:object="${producto}" th:href="@{/tienda_luis_mangas_ruiz/insertar_carro}">
-								<a class="btn" type="submit">Añadir al carro</a>
-								<input type="submit" text="aaaaa">
+							<form>
+								<a class="btn" th:href="@{/insertar_carro/{id} (id=${producto.id})}" type="submit">Añadir al carro</a>
 							</form>
 							
 						</div>

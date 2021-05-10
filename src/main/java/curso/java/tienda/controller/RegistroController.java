@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.model.Usuario;
+import curso.java.tienda.service.OpcionMenuService;
 import curso.java.tienda.service.UsuarioService;
 
 @Controller
@@ -22,6 +23,8 @@ public class RegistroController {
 
 	@Autowired
 	private UsuarioService uS;
+	@Autowired
+	private OpcionMenuService oms;
 	
 	@GetMapping("")
 	public String registro(Model model){
@@ -38,6 +41,8 @@ public class RegistroController {
 		else {
 			uS.insertaUsuario(usuario);
 			session.setAttribute("usuario", usuario);//Pone el usuario en la sesión
+			//Meto las opciones del menu
+			session.setAttribute("opcionesMenu", oms.listadoOpcionesIdRol(usuario.getIdRol()));
 			
 			return "redirect:/";
 		}
