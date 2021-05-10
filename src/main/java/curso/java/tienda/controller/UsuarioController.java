@@ -21,19 +21,13 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService uS;
 	
-	@GetMapping("/altaUsuario")
-	public String altaUsuario(Model model){
-		model.addAttribute("usuario", new Usuario());
+	@GetMapping("/perfil")
+	public String perfil() {
 		
-		return "altaUsuario";
+		return "/usuario/perfil";
+//		return "redirect:/tienda_luis_mangas_ruiz";
 	}
 	
-	@PostMapping("/altaCorrecta")
-	public String altaCorrecta(Model model, @ModelAttribute Usuario u){
-		System.out.println(u.toString());
-		
-		return "correcto";
-	}
 	
 	@GetMapping("/cerrar_sesion")
 	public String cerrarSesion(HttpSession session) {
