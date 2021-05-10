@@ -31,7 +31,7 @@ public class ProductoController {
 	private OpcionMenuService oms;
 	
 	@GetMapping("")
-	public String inicio(Model model,HttpSession session) {
+	public String inicio(Model model, HttpSession session) {
 		
 		model.addAttribute("listaProductos", ps.listadoProductos());
 		session.setAttribute("listaCategorias", cs.listadoCategorias());//creo la lista de categorias en el inicio
@@ -49,23 +49,25 @@ public class ProductoController {
 		return "producto/lista";
 	}
 	
-	@GetMapping("/detalle")
-	public String detalle(Model model,HttpSession session) {
+	@GetMapping("/detalle/{id}")
+	public String detalle(Model model,HttpSession session, @PathVariable("id") Integer id) {
 		
-		model.addAttribute("listaProductos", ps.listadoProductos());
+		Producto producto = ps.getProductoId(id);
+		
+		model.addAttribute("producto", producto);
 		
 		return "producto/detalle";
 	}
 	
 	@GetMapping("/carro")
-	public String carro(Model model,HttpSession session) {
+	public String carro() {
 		
 		return "producto/carro";
 	}
 	
 	
 	@GetMapping("/insertar_carro/{id}")
-	public String insertarCarro(Model model, HttpSession session, @PathVariable("id") Integer id) {
+	public String insertarCarro(HttpSession session, @PathVariable("id") Integer id) {
 		
 		ArrayList<Producto> carro = null;
 		

@@ -13,6 +13,7 @@
 <body>
 	<!-- 	<div th:insert="fragments/header.html :: header"></div> -->
 	<header th:include="fragments/header.html" />
+	
 	<div class="container pb-5 mt-n2 mt-md-n3">
 		<div class="row">
 			<div class="col-xl-9 col-md-8">
@@ -36,7 +37,7 @@
 							alt="Product"></a>
 						<div class="media-body pt-3">
 							<h3 class="product-card-title font-weight-semibold border-0 pb-0">
-								<a href="#" th:text="${producto.nombre}">Calvin Klein Jeans Keds</a>
+								<a th:href="@{/detalle/{id} (id=${producto.id})}" th:text="${producto.nombre}">Calvin Klein Jeans Keds</a>
 							</h3>
 							<div class="font-size-sm">
 								<span class="text-muted mr-2">Size:</span>8.5

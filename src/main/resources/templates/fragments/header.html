@@ -63,12 +63,15 @@
 						</div>
 						<div th:if="${opcion.opcion} == 'Perfil'">
 							<li class="dropdown"><a class="nav-item nav-link active" data-toggle="dropdown" th:text="${session.usuario.email}">default</a>
+								<i class="fa fa-user-circle" aria-hidden="true"></i>
 								<div class="dropdown-menu">
 									<a href="" class="dropdown-item">Ver perfil</a>
 									<a th:if="${session.usuario.idRol} == 3" href="" class="dropdown-item">Pedidos</a> 
 									<a href="#" class="dropdown-item">Ajustes</a> 
 									<a th:href="@{/usuario/cerrar_sesion}" method="post" class="dropdown-item">Cerrar sesión</a>
 								</div>
+								
+								
 							</li>
 						</div>
 						<div th:unless="${opcion.opcion} == 'Perfil' OR ${opcion.opcion} == 'Categorias'">

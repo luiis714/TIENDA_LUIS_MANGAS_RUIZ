@@ -25,7 +25,7 @@
 						<div class="item-dtls">
 							<!-- product title -->
 							<h4>
-								<a th:href="@{/detalle}" th:text="${producto.nombre}">Lorem product</a>
+								<a th:href="@{/detalle/{id} (id=${producto.id})}" th:text="${producto.nombre}">Lorem product</a>
 							</h4>
 							<!-- price -->
 							<span class="price lblue" th:text="${producto.precio}+€">$00.00</span>
@@ -35,7 +35,6 @@
 							<form>
 								<a class="btn" th:href="@{/insertar_carro/{id} (id=${producto.id})}" type="submit">Añadir al carro</a>
 							</form>
-							
 						</div>
 					</div>
 				</div>
