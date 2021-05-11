@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Productos</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet" th:href="@{/css/producto/carro.css}">
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Carro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=5">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    
 
 </head>
 <body>
@@ -17,16 +17,9 @@
 	<div class="container pb-5 mt-n2 mt-md-n3">
 		<div class="row">
 			<div class="col-xl-9 col-md-8">
-				<h2
-					class="h2 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary">
+				<h2 class="h2 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-info" background-color="gray">
 					<span>Productos</span>
-					<a class="font-size-m" th:href="@{/}"><svg
-							xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-							viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-chevron-left"
-							style="width: 2rem; height: 2rem;">
-							<polyline points="15 18 9 12 15 6"></polyline></svg>Continuar comprando</a>
+					<a class="font-size-g text-white" th:href="@{/}">< Continuar comprando</a>
 				</h2>
 				<!-- Item-->
 				<div th:each="producto : ${session.carro}"
@@ -42,17 +35,16 @@
 							<div class="font-size-sm">
 								<span class="text-muted mr-2">Size:</span>8.5
 							</div>
-							<div class="font-size-sm">
+							<div class="h3 font-size-sm">
 								<span class="text-muted mr-2">Color:</span>Black
 							</div>
-							<div class="font-size-lg text-primary pt-2" th:text="${producto.precio}+€">$125.00</div>
+							<div class="h2 font-size-lg text-primary pt-2" th:text="${producto.precio}+€">$125.00</div>
 						</div>
 					</div>
-					<div
-						class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left"
+					<div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left"
 						style="max-width: 10rem;">
 						<div class="form-group mb-2">
-							<label for="quantity1">Cantidad</label> <input
+							<label class="h3" for="quantity1">Cantidad</label> <input
 								class="form-control form-control-sm" type="number"
 								id="quantity1" value="1">
 						</div>
@@ -67,10 +59,9 @@
 	                            <path
 									d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
 	                        </svg>
-							Actualizar carro
+							Actualizar
 						</button>
-						<button class="btn btn-outline-danger btn-sm btn-block mb-2"
-							type="button">
+						<a th:href="@{/borrar_carro/{id} (id=${producto.id})}" class="btn btn-outline-danger btn-sm btn-block mb-2" type="button">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -82,19 +73,19 @@
 	                            <line x1="14" y1="11" x2="14" y2="17"></line>
 	                        </svg>
 							Borrar
-						</button>
+						</a>
 					</div>
 				</div>
 				<!-- Sidebar-->
-				<div class="col-xl-3 col-md-4 pt-3 pt-md-0">
-					<h2 class="h2 px-4 py-3 bg-secondary text-center">Total</h2>
-					<div class="h3 font-weight-semibold text-center py-3">00.00€</div>
+				<div class="col-xl-3 col-md-4 pt-3 pt-md-0 ">
+					<h2 class="h2 px-4 py-3 bg-secondary text-center bg-info">Total</h2>
+					<div class="h3 font-weight-semibold text-center py-3" >00.00€</div>
 					<hr>
 					<h3 class="h4 pt-4 font-weight-semibold">
 						<span class="badge badge-success mr-2">Notas</span>Comentario adicional
 					</h3>
 					<textarea class="form-control mb-3" id="order-comments" rows="5"></textarea>
-					<a class="btn btn-primary btn-block" href="#"> 
+					<a class="btn btn-primary btn-block bg-info" href="#"> 
 						<svg
 							xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 							viewBox="0 0 24 24" fill="none" stroke="currentColor"

@@ -65,6 +65,26 @@ public class ProductoController {
 		return "producto/carro";
 	}
 	
+	@GetMapping("/borrar_carro/{id}")
+	public String borrarCarro(HttpSession session, @PathVariable("id") Integer id) {
+		Producto producto = ps.getProductoId(id);
+		ArrayList<Producto> carro = (ArrayList<Producto>) session.getAttribute("carro");
+		
+		//Lo uso para que no borre si tengo más de un único producto
+		boolean flag = true;
+		
+		for(int i = 0; (i < carro.size()) && flag; i++){
+			//Compruebo el id del producto para borrarlo
+			if(producto.getId() == carro.get(i).getId()) {
+				carro.remove(i);
+				flag = false;//para salir del bucle
+			}
+		}
+		
+		session.setAttribute("carro", carro);
+		
+		return "redirect:/carro";
+	}
 	
 	@GetMapping("/insertar_carro/{id}")
 	public String insertarCarro(HttpSession session, @PathVariable("id") Integer id) {
@@ -81,8 +101,6 @@ public class ProductoController {
 			Producto producto = ps.getProductoId(id);
 			carro.add(producto);
 		}
-		
-		System.out.println(carro.size());
 		
 		session.setAttribute("carro", carro);
 		
