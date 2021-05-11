@@ -79,12 +79,18 @@
 				<!-- Sidebar-->
 				<div class="col-xl-3 col-md-4 pt-3 pt-md-0 ">
 					<h2 class="h2 px-4 py-3 bg-secondary text-center bg-info">Total</h2>
-					<div class="h3 font-weight-semibold text-center py-3" >00.00€</div>
+					<div class="h3 font-weight-semibold text-center py-3" th:text="${precioTotal}">00.00€</div>
 					<hr>
 					<h3 class="h4 pt-4 font-weight-semibold">
-						<span class="badge badge-success mr-2">Notas</span>Comentario adicional
+						<span class="badge badge-success mr-2">Pago</span>Métodos de pago
 					</h3>
-					<textarea class="form-control mb-3" id="order-comments" rows="5"></textarea>
+					<select class="h4">
+						<div th:each="metodo : ${metodosPago}">
+							<option th:text="${metodo.metodoPago}"></option>
+						</div>
+					</select>
+					<br><br><br><br>
+					
 					<a class="btn btn-primary btn-block bg-info" href="#"> 
 						<svg
 							xmlns="http://www.w3.org/2000/svg" width="24" height="24"

@@ -16,6 +16,7 @@ import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.repository.ProductoRepository;
 import curso.java.tienda.service.CategoriaService;
+import curso.java.tienda.service.MetodoPagoService;
 import curso.java.tienda.service.OpcionMenuService;
 import curso.java.tienda.service.ProductoService;
 
@@ -29,6 +30,8 @@ public class ProductoController {
 	private CategoriaService cs;
 	@Autowired
 	private OpcionMenuService oms;
+	@Autowired
+	private MetodoPagoService mps;
 	
 	@GetMapping("")
 	public String inicio(Model model, HttpSession session) {
@@ -60,7 +63,20 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/carro")
-	public String carro() {
+	public String carro(HttpSession session, Model model) {
+		ArrayList<Producto> carro = (ArrayList<Producto>) session.getAttribute("carro");
+		
+		Double total = 0.0d;
+		
+		//Saco el total de la venta
+		for(int i = 0; i < carro.size(); i++) {
+			total += carro.get(i).getPrecio();
+		}
+		
+		
+		model.addAttribute("metodosPago", mps.listadoMetodos());
+		model.addAttribute("precioTotal", total);
+		
 		
 		return "producto/carro";
 	}
