@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import curso.java.tienda.model.Pedido;
 import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.repository.ProductoRepository;
@@ -156,8 +157,8 @@ public class ProductoController {
 		}
 		
 		model.addAttribute("metodosPago", mps.listadoMetodos());
+		model.addAttribute("pedido", new Pedido());
 		model.addAttribute("precioTotal", total);
-		
 		
 		return "producto/carro";
 	}

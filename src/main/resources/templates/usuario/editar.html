@@ -16,6 +16,9 @@
 			
 			<input id="id" name="id" type="hidden" th:value="${usuario.id}">
 			<input id="clave" name="clave" type="hidden" th:value="${usuario.clave}">
+			<input id="id_rol" th:field="*{idRol}" name="id_rol" type="hidden" th:value="${usuario.idRol}">
+
+			</div>
 			<!-- Text input-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="email">Email</label>
@@ -29,7 +32,9 @@
 			<!-- Text input-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="rol">Rol</label>
-				<div class="col-md-4" th:each="rol : ${listaRoles}"><label th:if="${usuario.idRol == rol.id}" id="rol" name="rol" th:text="${rol.rol}"></label></div>
+				<div class="col-md-4" th:each="rol : ${listaRoles}">
+					<label th:if="${usuario.idRol == rol.id}" th:text="${rol.rol}">
+				</div>
 			</div>
 
 			<!-- Text input-->
