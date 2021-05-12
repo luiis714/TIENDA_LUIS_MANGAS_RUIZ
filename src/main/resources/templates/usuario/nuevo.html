@@ -30,9 +30,14 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="rol">Rol</label>
 				<div class="col-md-4">
-					<select id="id_rol" th:field="*{idRol}" name="id_rol">
+					<select th:if="${session.usuario.idRol == 1}" id="id_rol" th:field="*{idRol}" name="id_rol">
 						<div th:each="rol : ${listaRoles}">
 							<option th:if="${rol.id != 4}" th:value="${rol.id}" th:text="${rol.rol}"></option>
+						</div>
+					</select>
+					<select th:if="${session.usuario.idRol == 2}" id="id_rol" th:field="*{idRol}" name="id_rol">
+						<div th:each="rol : ${listaRoles}">
+							<option th:if="${rol.id != 4 AND rol.id != 1}" th:value="${rol.id}" th:text="${rol.rol}"></option>
 						</div>
 					</select>
 				</div>

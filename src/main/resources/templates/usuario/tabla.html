@@ -68,14 +68,13 @@
 									<span th:text="${usuario.dni}"></span>
 								</td>
 								<td style="width: 10%;">
-									<a th:if="${usuario.idRol == 3}" th:href="@{/usuario/editar_cliente/{id} (id=${usuario.id})}" class="table-link">
+									<a th:href="@{/usuario/editar_usuario/{id} (id=${usuario.id})}" class="table-link">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
 										</span>
 									</a>
-
-
+									
 									<a th:if="${session.usuario.idRol == 1} AND ${usuario.idRol == 3}" th:href="@{/usuario/borrar_cliente/{id} (id=${usuario.id})}" class="table-link danger">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>

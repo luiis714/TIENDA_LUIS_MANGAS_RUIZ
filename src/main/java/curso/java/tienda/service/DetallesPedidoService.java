@@ -1,6 +1,7 @@
 package curso.java.tienda.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,9 @@ public class DetallesPedidoService {
 		}
 		
 		repository.saveAll(lista);
+	}
+	
+	public Iterable<DetallesPedido> devuelveDetallesIdPedido(int idPedido){
+		return repository.findAllByIdPedido(idPedido);
 	}
 }

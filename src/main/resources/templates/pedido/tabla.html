@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Historial pedidos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/pedido/tabla.css}">
+</head>
+<body>
+<header th:include="fragments/header.html"></header>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box clearfix">
+                    <div class="table-responsive">
+                        <table class="h4 table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Nº Pedido</span></th>
+                                <th><span>Fecha</span></th>
+                                <th><span>Usuario</span></th>
+                                <th class="text-center"><span>Estado</span></th>
+                                <th><span>Metodo pago</span></th>
+                                <th><span>Total (€)</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                <tr th:each="pedido : ${listaPedidos}">
+                                    <td>
+                                        <a th:href="@{/pedido/detalle/{id} (id=${pedido.id})}" class="user-link" th:text="${pedido.id}"></a>
+<!--                                         <span class="user-subhead">Member</span> -->
+                                    </td>
+									<td>
+                                        <span th:text="${pedido.fecha}"></span>
+                                    </td>
+                                    <td>
+                                    	<div th:each="usuario : ${listaUsuarios}">
+                                    		<span th:if="${pedido.idUsuario == usuario.id}" th:text="${usuario.email}"></span>
+                                    	</div>
+                                        
+                                    </td>
+                                    <td class="text-center">
+                                    	<span th:if="${pedido.estado == 'pendiente'}" class="label label-default" th:text="${pedido.estado}">pendiente</span>
+                                        <span th:if="${pedido.estado == 'cancelado'}" class="label label-danger" th:text="${pedido.estado}">cancelado</span>
+                                        <span th:if="${pedido.estado == 'cancelar pendiente'}" class="label label-warning" th:text="${pedido.estado}">cancelar</span>
+                                        <span th:if="${pedido.estado == 'enviado'}" class="label label-success" th:text="${pedido.estado}">enviado</span>
+                                    </td>
+									<td>
+                                        <span th:text="${pedido.metodoPago}"></span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${pedido.total}"></span>€
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a th:if="${pedido.estado == 'pendiente'}" th:href="@{/pedido/enviar/{id} (id=${pedido.id})}" class="table-link text-info">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i  class="fa fa-truck fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+<!--                                         Compruebo si esta pendiente de cancelar y si es admin -->
+                                        <a th:if="${pedido.estado == 'cancelar pendiente'} AND ${session.usuario.idRol == 1}" th:href="@{/pedido/cancelacion/{id} (id=${pedido.id})}" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination pagination-lg pull-right pager" id="myPager"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:include="fragments/footer.html"></footer>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script th:src="@{/js/producto/paginacion.js}"></script>
+
+</body>
+</html>

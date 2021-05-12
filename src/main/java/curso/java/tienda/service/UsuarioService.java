@@ -16,6 +16,8 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repository;
+	@Autowired
+	private VariosService service;
 	
 	public Usuario devuelveUsuarioEmail(String email){
 		return repository.findByEmail(email);
@@ -30,8 +32,14 @@ public class UsuarioService {
 		return repository.findAllByIdRol(3);
 	}
 	
+	public Object listadoEmpleados() {
+		//Devuelvo todos los usuarios que tengan el rol 2 de empleado
+		return repository.findAllByIdRol(2);
+	}
+	
 	public boolean compruebaUsuario(String email, String clave) {
 		Usuario usuario = devuelveUsuarioEmail(email);
+		//Para desencriptar la clave
 		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 		
 		//Si el usuario no es null y su clave es la misma que la que de ha introducido
@@ -42,30 +50,18 @@ public class UsuarioService {
 			return false;
 	}
 	
-	public void insertaUsuario(String nombre, String apellido1, String apellido2, String email, String clave) {
-		//Lo creo como id rol 3 ya que es el cliente
-		Usuario usuario = new Usuario(3, email, clave, nombre, apellido1, apellido2);
-		
-		//Guardo en la BBDD
-		repository.save(usuario);
-	}
-	
 	public void insertaUsuario(Usuario usuario) {
 		//Rol 3 porque son clientes
 		usuario.setIdRol(3);
 		
-		//Encripto la contraseña para guardarla en la BBDD
-		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-		usuario.setClave(passwordEncryptor.encryptPassword(usuario.getClave()));//Encripto la contraseña
+		usuario.setClave(service.encriptarClave((usuario.getClave())));//Encripto la contraseña
 		
 		//Guardo en la BBDD
 		repository.save(usuario);
 	}
 	
 	public void nuevoUsuario(Usuario usuario) {
-		//Encripto la contraseña para guardarla en la BBDD
-		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-		usuario.setClave(passwordEncryptor.encryptPassword(usuario.getClave()));//Encripto la contraseña
+		usuario.setClave(service.encriptarClave((usuario.getClave())));//Encripto la contraseña
 		
 		repository.save(usuario);
 	}
@@ -79,7 +75,6 @@ public class UsuarioService {
 	}
 	
 	public void cerrarSesion(HttpSession session) {
-		
 		if(session != null) {
 			session.invalidate();
 		}

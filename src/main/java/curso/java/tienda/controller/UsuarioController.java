@@ -34,10 +34,24 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/cliente/tabla")
-	public String tabla(Model model, HttpSession session) {
+	public String tablaCliente(Model model, HttpSession session) {
 		//Añado lista de productos
 		model.addAttribute("listaRoles", rs.listadoRoles());
 		model.addAttribute("listaUsuarios", uS.listadoClientes());
+		
+		if(session.getAttribute("usuario") == null) {
+			return "redirect:/";
+		}
+		else {
+			return "usuario/tabla";	
+		}
+	}
+	
+	@GetMapping("/empleado/tabla")
+	public String tablaEmpleado(Model model, HttpSession session) {
+		//Añado lista de productos
+		model.addAttribute("listaRoles", rs.listadoRoles());
+		model.addAttribute("listaUsuarios", uS.listadoEmpleados());
 		
 		if(session.getAttribute("usuario") == null) {
 			return "redirect:/";
@@ -95,11 +109,19 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/borrar_cliente/{id}")
-	public String borrar(Model model,HttpSession session, @PathVariable("id") Integer id) {
+	public String borrarCliente(Model model,HttpSession session, @PathVariable("id") Integer id) {
 
 		uS.borrarUsuario(id);
 		
 		return "redirect:/usuario/cliente/tabla";
+	}
+	
+	@GetMapping("/borrar_empleado/{id}")
+	public String borrarEmpleado(Model model,HttpSession session, @PathVariable("id") Integer id) {
+
+		uS.borrarUsuario(id);
+		
+		return "redirect:/usuario/empleado/tabla";
 	}
 	
 	@GetMapping("/cerrar_sesion")

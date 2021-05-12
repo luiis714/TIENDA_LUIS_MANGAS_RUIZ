@@ -25,9 +25,10 @@
 				<div th:each="producto : ${session.carro}"
 					class="d-sm-flex justify-content-between my-4 pb-4 border-bottom">
 					<div class="media d-block d-sm-flex text-center text-sm-left">
-						<a class="img-responsive cart-item-thumb mx-auto mr-sm-4" href="#"><img
-							th:src="@{/img/producto/producto1.jpg}"
-							alt="Product"></a>
+<!-- 						<a class="cart-item-thumb mx-auto mr-sm-4" href=""><img -->
+<!-- 							th:src="@{/img/producto/producto1.jpg}" -->
+<!-- 							alt="Product"></a> -->
+						<img height=50% width=10% th:src="@{/img/producto/producto1.jpg}"></img>
 						<div class="media-body pt-3">
 							<h3 class="product-card-title font-weight-semibold border-0 pb-0">
 								<a th:href="@{/detalle/{id} (id=${producto.id})}" th:text="${producto.nombre}">Calvin Klein Jeans Keds</a>
@@ -79,7 +80,7 @@
 						</select>
 						<br><br><br><br>
 						
-						<input type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary btn-block bg-info" value="Pagar">
+						<input th:if="${session.carro.size() != 0}" type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary btn-block bg-info" value="Pagar">
 		                
 					</div>
 				</form>

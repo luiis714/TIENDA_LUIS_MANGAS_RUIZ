@@ -8,7 +8,7 @@
 	<link rel="stylesheet" th:href="@{/css/producto/tabla.css}">
 </head>
 <body>
-	<header th:include="fragments/header.html"/>
+	<header th:include="fragments/header.html"></header>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 	<div class="container">
 	<div class="row">
@@ -56,7 +56,7 @@
 									<span th:text="${producto.impuesto}"></span>
 								</td>
 								<td style="width: 10%;">
-									<a th:href="@{/editar_producto/{id} (id=${producto.id})}" class="table-link">
+									<a th:href="@{/}" class="table-link">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
