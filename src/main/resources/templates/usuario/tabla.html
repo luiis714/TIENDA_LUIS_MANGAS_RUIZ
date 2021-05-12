@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-	<title>Tabla productos</title>
+	<title>Tabla usuarios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/css/producto/tabla.css}">
@@ -16,53 +16,65 @@
 			<div class="main-box clearfix">
 				<div class="table-responsive">
 				
-					<a th:href="@{/nuevo_producto}" class="btn btn-info btn-lg">Añadir</a>
+					<a th:href="@{/nuevo_cliente}" class="btn btn-info btn-lg">Añadir</a>
 					
 					<table class="h4 table table-hover user-list">
 						<thead>
 							<tr>
-								<th><span>Producto</span></th>
-								<th><span>Descripción</span></th>
-								<th><span>Precio (€)</span></th>
-								<th><span>Fecha alta</span></th>
-								<th><span>Fecha baja</span></th>
-								<th><span>Impuesto</span></th>
+								<th><span>Usuario</span></th>
+								<th><span>Nombre</span></th>
+								<th><span>Primer apellido</span></th>
+								<th><span>Segundo apellido</span></th>
+								<th><span>Dirección</span></th>
+								<th><span>Localidad</span></th>
+								<th><span>Provincia</span></th>
+								<th><span>Teléfono</span></th>
+								<th><span>DNI</span></th>
 								<th>&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody id="myTable">
-							<tr th:each="producto : ${listaProductos}">
+							<tr th:each="usuario : ${listaUsuarios}">
 								<td>
-									<img th:src="@{img/producto/producto1.jpg}" alt="">
-									<a href="#" class="user-link" th:text="${producto.nombre}"></a>
-									<div th:each="categoria : ${listaCategorias}">
-										<span th:if="${producto.idCategoria == categoria.id}" class="user-subhead"  th:text="${categoria.nombre}"></span>
+									<img th:src="@{img/usuario/default.png}" alt="">
+									<a href="#" class="user-link" th:text="${usuario.email}"></a>
+									<div th:each="rol : ${listaRoles}">
+										<span th:if="${usuario.idRol == rol.id}" class="user-subhead"  th:text="${rol.rol}"></span>
 									</div>
 									
 								</td>
 								<td>
-									<span th:text="${producto.descripcion}"></span>
+									<span th:text="${usuario.nombre}"></span>
 								</td>
 								<td class="text-center">
-									<span th:text="${producto.precio}+'€'"></span>
+									<span th:text="${usuario.apellido1}"></span>
 								</td>
 								<td class="text-center">
-									<span th:text="${producto.fechaAlta}"></span>
+									<span th:text="${usuario.apellido2}"></span>
 								</td>
 								<td class="text-center">
-									<span th:text="${producto.fechaBaja}"></span>
+									<span th:text="${usuario.direccion}"></span>
 								</td>
 								<td>
-									<span th:text="${producto.impuesto}"></span>
+									<span th:text="${usuario.localidad}"></span>
+								</td>
+								<td>
+									<span th:text="${usuario.provincia}"></span>
+								</td>
+								<td>
+									<span th:text="${usuario.telefono}"></span>
+								</td>
+								<td>
+									<span th:text="${usuario.dni}"></span>
 								</td>
 								<td style="width: 10%;">
-									<a th:href="@{/editar_producto/{id} (id=${producto.id})}" class="table-link">
+									<a th:href="@{/editar_usuario/{id} (id=${usuario.id})}" class="table-link">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
 										</span>
 									</a>
-									<a th:if="${session.usuario.idRol == 1}" th:href="@{/borrar_producto/{id} (id=${producto.id})}" class="table-link danger">
+									<a th:if="${session.usuario.idRol == 1}" th:href="@{/borrar_usuario/{id} (id=${usuario.id})}" class="table-link danger">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>

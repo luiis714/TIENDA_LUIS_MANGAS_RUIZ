@@ -28,4 +28,16 @@ public class ProductoService {
 	public Iterable<Producto> listadoProductosCategoria(int idCategoria){
 		return repository.findAllByIdCategoria(idCategoria);
 	}
+	
+	public void nuevoProducto(Producto producto) {
+		repository.save(producto);
+	}
+	
+	public void actualizarProducto(Producto producto) {
+		repository.save(producto);
+	}
+	
+	public void borrarProducto(Integer id) {
+		repository.deleteById(id);
+	}
 }

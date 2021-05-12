@@ -5,7 +5,6 @@ html {
 }
 body {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
 }
 h1 {
   margin-bottom: 0.5em;
@@ -69,7 +68,7 @@ p {
 .header-area {
   position: relative;
   height: 100%;
-/*   background: #5bc0de; */
+  background: #5bc0de;
   background-attachment: fixed;
   background-position: center center;
   background-repeat: no-repear;

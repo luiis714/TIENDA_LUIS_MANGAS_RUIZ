@@ -18,7 +18,16 @@ public class UsuarioService {
 	public Usuario devuelveUsuarioEmail(String email){
 		return repository.findByEmail(email);
 	}
-
+	
+	public Usuario devuelveUsuarioId(Integer id){
+		return repository.findById(id);
+	}
+	
+	public Iterable<Usuario> listadoClientes(){
+		//Devuelvo todos los usuarios que tengan el rol 3 de cliente
+		return repository.findAllById(3);
+	}
+	
 	public boolean compruebaUsuario(String email, String clave) {
 		Usuario usuario = devuelveUsuarioEmail(email);
 		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
@@ -48,6 +57,10 @@ public class UsuarioService {
 		usuario.setClave(passwordEncryptor.encryptPassword(usuario.getClave()));//Encripto la contraseña
 		
 		//Guardo en la BBDD
+		repository.save(usuario);
+	}
+	
+	public void nuevoUsuario(Usuario usuario) {
 		repository.save(usuario);
 	}
 	
