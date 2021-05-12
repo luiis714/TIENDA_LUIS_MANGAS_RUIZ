@@ -62,25 +62,24 @@
 						</a>
 					</div>
 				</div>
-				<form method="post" th:action="@{/pedido/nuevo}" th:object="${pedido}">
+				<form method="post" th:action="@{/pedido/nuevo}">
 					<!-- Sidebar-->
 					<div class="col-xl-3 col-md-4 pt-3 pt-md-0 ">
 						<h2 class="h2 px-4 py-3 bg-secondary text-center bg-info">Total</h2>
 						<div class="h3 font-weight-semibold text-center py-3" th:text="${precioTotal}+€">00.00€</div>
-						<input id="total" name="total" th:value="${pedido.total}" th:text="${precioTotal}">
+						<input id="total_compra" name="total_compra" type="hidden" th:value="${precioTotal}">
 						<hr>
 						<h3 class="h4 pt-4 font-weight-semibold">
 							<span class="badge badge-success mr-2">Pago</span>Métodos de pago
 						</h3>
-						<select id="metodo_pago" th:field="*{metodoPago}" name="metodo_pago" class="h4">
+						<select id="metodo_pago"  name="metodo_pago" class="h4">
 							<div th:each="metodo : ${metodosPago}">
 								<option th:value="${metodo.metodoPago}" th:text="${metodo.metodoPago}"></option>
 							</div>
 						</select>
 						<br><br><br><br>
 						
-						<input type="submit" id="singlebutton" name="singlebutton"
-								class="btn btn-primary btn-block bg-info" value="Pagar">
+						<input type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary btn-block bg-info" value="Pagar">
 		                
 					</div>
 				</form>
@@ -89,7 +88,7 @@
 		</div>
 		</div>
 		
-		<div th:insert="fragments/footer.html"></div>
+		<footer th:insert="fragments/footer.html"></footer>
 
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -157,7 +157,6 @@ public class ProductoController {
 		}
 		
 		model.addAttribute("metodosPago", mps.listadoMetodos());
-		model.addAttribute("pedido", new Pedido());
 		model.addAttribute("precioTotal", total);
 		
 		return "producto/carro";

@@ -1,6 +1,6 @@
 package curso.java.tienda.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,33 +11,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
-	
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+
 	@Column(name = "id_usuario")
 	private Integer idUsuario;
-	
+
 	private Date fecha;
-	
+
 	@Column(name = "metodo_pago")
 	private String metodoPago;
-	
+
 	private String estado;
-	
+
 	@Column(name = "num_factura")
 	private String numFactura;
-	
+
 	private Double total;
 
 	public Pedido() {
-		
 	}
 
 	public Pedido(Integer id, Integer idUsuario, Date fecha, String metodoPago, String estado, String numFactura,
 			Double total) {
-		super();
 		this.id = id;
 		this.idUsuario = idUsuario;
 		this.fecha = fecha;
@@ -150,4 +147,6 @@ public class Pedido {
 		return "Pedido [id=" + id + ", idUsuario=" + idUsuario + ", fecha=" + fecha + ", metodoPago=" + metodoPago
 				+ ", estado=" + estado + ", numFactura=" + numFactura + ", total=" + total + "]";
 	}
+	
+	
 }
