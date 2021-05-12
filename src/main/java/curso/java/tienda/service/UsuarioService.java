@@ -1,5 +1,7 @@
 package curso.java.tienda.service;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
@@ -19,13 +21,13 @@ public class UsuarioService {
 		return repository.findByEmail(email);
 	}
 	
-	public Usuario devuelveUsuarioId(Integer id){
+	public Usuario devuelveUsuarioId(int id){
 		return repository.findById(id);
 	}
 	
 	public Iterable<Usuario> listadoClientes(){
 		//Devuelvo todos los usuarios que tengan el rol 3 de cliente
-		return repository.findAllById(3);
+		return repository.findAllByIdRol(3);
 	}
 	
 	public boolean compruebaUsuario(String email, String clave) {
@@ -61,7 +63,19 @@ public class UsuarioService {
 	}
 	
 	public void nuevoUsuario(Usuario usuario) {
+		//Encripto la contraseña para guardarla en la BBDD
+		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		usuario.setClave(passwordEncryptor.encryptPassword(usuario.getClave()));//Encripto la contraseña
+		
 		repository.save(usuario);
+	}
+	
+	public void actualizarUsuario(Usuario usuario) {
+		repository.save(usuario);
+	}
+	
+	public void borrarUsuario(Integer id) {
+		repository.deleteById(id);
 	}
 	
 	public void cerrarSesion(HttpSession session) {

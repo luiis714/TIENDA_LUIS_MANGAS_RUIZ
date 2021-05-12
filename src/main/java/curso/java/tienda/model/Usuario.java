@@ -22,8 +22,7 @@ public class Usuario {
 	@Email(message="Debe ser una dirección de correo electrónico con formato correcto")
 	@Column(unique = true)
 	private String email;
-	
-	@NotBlank(message="El contraseña es obligatorio")
+
 	private String clave;
 	
 	@NotBlank(message="El nombre es obligatorio")

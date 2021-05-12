@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nuevo producto</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+	<header th:include="fragments/header.html"></header>
+
+	<form method="post" class="h4 form-horizontal" th:action="@{/usuario/editar_usuario/enviar}" th:object="${usuario}">
+		<fieldset>
+
+			<!-- Form Name -->
+			<legend class="h1 center">Editar usuario</legend>
+			
+			<input id="id" name="id" type="hidden" th:value="${usuario.id}">
+			<input id="clave" name="clave" type="hidden" th:value="${usuario.clave}">
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="email">Email</label>
+				<div class="col-md-4">
+					<input id="email" th:field="*{email}" name="email" type="email"
+						placeholder="" class="form-control input-md" required=""
+						th:value="${usuario.email}">
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="rol">Rol</label>
+				<div class="col-md-4" th:each="rol : ${listaRoles}"><label th:if="${usuario.idRol == rol.id}" id="rol" name="rol" th:text="${rol.rol}"></label></div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="nombre">Nombre</label>
+				<div class="col-md-4">
+					<input id="nombre" th:field="*{nombre}" name="nombre" type="text"
+						placeholder="" class="form-control input-md" required=""
+						th:value="${usuario.nombre}">
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="apellido1">Primer apellido</label>
+				<div class="col-md-4">
+					<input id="apellido1"  name="apellido1" type="text"
+						placeholder="" class="form-control input-md" required=""
+						th:value="${usuario.apellido1}">
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="apellido2">Segundo apellido</label>
+				<div class="col-md-4">
+					<input id="apellido2" name="apellido2" type="text"
+						placeholder="" class="form-control input-md" required=""
+						th:value="${usuario.apellido2}">
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="direccion">Direccion</label>
+				<div class="col-md-4">
+					<input id="direccion" name="direccion" type="text"
+						class="form-control input-md" required=""
+						th:value="${usuario.direccion}">
+
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="localidad">Localidad</label>
+				<div class="col-md-4">
+					<input id="localidad" name="localidad" type="text"
+						class="form-control input-md" required=""
+						th:value="${usuario.localidad}">
+
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="provincia">Provincia</label>
+				<div class="col-md-4">
+					<input id="provincia" name="provincia" type="text"
+						class="form-control input-md" required=""
+						th:value="${usuario.provincia}">
+
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="telefono">Teléfono</label>
+				<div class="col-md-4">
+					<input id="telefono" name="telefono" type="text"
+						class="form-control input-md" required=""
+						th:value="${usuario.telefono}">
+
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="dni">DNI</label>
+				<div class="col-md-4">
+					<input id="dni" name="dni" type="text"
+						class="form-control input-md" required=""
+						th:value="${usuario.dni}">
+
+				</div>
+			</div>
+
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="singlebutton"></label>
+				<div class="col-md-4">
+					<button id="singlebutton" name="singlebutton"
+						class="btn btn-info btn-lg btn-block">Editar</button>
+				</div>
+			</div>
+
+		</fieldset>
+		
+		
+	</form>
+	
+	<footer th:include="fragments/footer.html"></footer>
+</body>
+</html>

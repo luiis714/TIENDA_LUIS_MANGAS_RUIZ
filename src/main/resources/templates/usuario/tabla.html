@@ -16,7 +16,7 @@
 			<div class="main-box clearfix">
 				<div class="table-responsive">
 				
-					<a th:href="@{/nuevo_cliente}" class="btn btn-info btn-lg">Añadir</a>
+					<a th:href="@{/usuario/nuevo_usuario}" class="btn btn-info btn-lg">Añadir</a>
 					
 					<table class="h4 table table-hover user-list">
 						<thead>
@@ -37,7 +37,7 @@
 							<tr th:each="usuario : ${listaUsuarios}">
 								<td>
 									<img th:src="@{img/usuario/default.png}" alt="">
-									<a href="#" class="user-link" th:text="${usuario.email}"></a>
+									<a href="" class="user-link" th:text="${usuario.email}"></a>
 									<div th:each="rol : ${listaRoles}">
 										<span th:if="${usuario.idRol == rol.id}" class="user-subhead"  th:text="${rol.rol}"></span>
 									</div>
@@ -68,13 +68,27 @@
 									<span th:text="${usuario.dni}"></span>
 								</td>
 								<td style="width: 10%;">
-									<a th:href="@{/editar_usuario/{id} (id=${usuario.id})}" class="table-link">
+									<a th:if="${usuario.idRol == 3}" th:href="@{/usuario/editar_cliente/{id} (id=${usuario.id})}" class="table-link">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
 										</span>
 									</a>
-									<a th:if="${session.usuario.idRol == 1}" th:href="@{/borrar_usuario/{id} (id=${usuario.id})}" class="table-link danger">
+
+
+									<a th:if="${session.usuario.idRol == 1} AND ${usuario.idRol == 3}" th:href="@{/usuario/borrar_cliente/{id} (id=${usuario.id})}" class="table-link danger">
+										<span class="fa-stack">
+											<i class="fa fa-square fa-stack-2x"></i>
+											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+										</span>
+									</a>
+									<a th:if="${session.usuario.idRol == 1} AND ${usuario.idRol == 2}" th:href="@{/usuario/borrar_empleado/{id} (id=${usuario.id})}" class="table-link danger">
+										<span class="fa-stack">
+											<i class="fa fa-square fa-stack-2x"></i>
+											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+										</span>
+									</a>
+									<a th:if="${session.usuario.idRol == 1} AND ${usuario.idRol == 1}" th:href="@{/usuario/borrar_admin/{id} (id=${usuario.id})}" class="table-link danger">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>

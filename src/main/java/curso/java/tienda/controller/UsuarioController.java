@@ -37,7 +37,7 @@ public class UsuarioController {
 	public String tabla(Model model, HttpSession session) {
 		//Añado lista de productos
 		model.addAttribute("listaRoles", rs.listadoRoles());
-		model.addAttribute("listaClientes", uS.listadoClientes());
+		model.addAttribute("listaUsuarios", uS.listadoClientes());
 		
 		if(session.getAttribute("usuario") == null) {
 			return "redirect:/";
@@ -45,12 +45,12 @@ public class UsuarioController {
 		else {
 			return "usuario/tabla";	
 		}
-		
 	}
 	
 	@GetMapping("/nuevo_usuario")
 	public String nuevo(Model model,HttpSession session) {
 		//Creo un nuevo cliente
+		model.addAttribute("listaRoles", rs.listadoRoles());
 		model.addAttribute("usuario", new Usuario());
 		
 		return "usuario/nuevo";
@@ -60,7 +60,6 @@ public class UsuarioController {
 	public String nuevoSubmit(Model model, @ModelAttribute Usuario usuario) {
 		//Inserto el usuario nuevo
 		uS.nuevoUsuario(usuario);
-		model.addAttribute("listaRoles", rs.listadoRoles());
 		
 		return "redirect:/";
 	}
@@ -76,21 +75,31 @@ public class UsuarioController {
 		return "usuario/editar";
 	}
 	
-	@PostMapping("/editar/enviar")
-	public String editarSubmit(Model model, @ModelAttribute Producto producto) {
-		ps.actualizarProducto(producto);
+	@GetMapping("/editar_cliente/{id}")
+	public String editarCliente(Model model, @PathVariable("id") Integer id) {
 		
-		model.addAttribute("listaCategorias", cs.listadoCategorias());
+		Usuario usuario= uS.devuelveUsuarioId(id);
+		
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("listaRoles", rs.listadoRoles());
+		
+		return "usuario/editar";
+	}
+	
+	@PostMapping("/editar_usuario/enviar")
+	public String editarSubmit(Model model, @ModelAttribute Usuario usuario) {
+		
+		uS.actualizarUsuario(usuario);
 		
 		return "redirect:/";
 	}
 	
-	@GetMapping("/borrar_producto/{id}")
+	@GetMapping("/borrar_cliente/{id}")
 	public String borrar(Model model,HttpSession session, @PathVariable("id") Integer id) {
 
-		uS.borrarProducto(id);
+		uS.borrarUsuario(id);
 		
-		return "redirect:/";
+		return "redirect:/usuario/cliente/tabla";
 	}
 	
 	@GetMapping("/cerrar_sesion")
