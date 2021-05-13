@@ -37,4 +37,16 @@ public class ProductoService {
 	public void borrarProducto(Integer id) {
 		repository.deleteById(id);
 	}
+
+	public Iterable<Producto> buscadorNombre(String cadena) {
+		return repository.findByNombreContains(cadena);
+	}
+
+	public Iterable<Producto> buscadorPrecioMayor(String cadena) {
+		return repository.findByPrecioGreaterThan(Double.parseDouble(cadena));
+	}
+
+	public Iterable<Producto> buscadorPrecioMenor(String cadena) {
+		return repository.findByPrecioLessThan(Double.parseDouble(cadena));
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.model.Pedido;
 import curso.java.tienda.model.Producto;
@@ -36,9 +37,26 @@ public class ProductoController {
 	private MetodoPagoService mps;
 	
 	@GetMapping("")
-	public String inicio(Model model, HttpSession session) {
+	public String inicio(Model model, HttpSession session, @RequestParam(name="buscar", required=false, defaultValue="") String cadena, @RequestParam(name="valor", required=false, defaultValue="nombre") String valor) {
 		
-		model.addAttribute("listaProductos", ps.listadoProductos());
+		Iterable<Producto> listaProductos = null;
+		
+		if(cadena.equals("")) {
+			listaProductos = ps.listadoProductos();
+		}
+		else if(valor.equals("nombre")){
+			listaProductos = ps.buscadorNombre(cadena);
+		}
+		else if(valor.equals("precio-mayor-que")) {
+			listaProductos = ps.buscadorPrecioMayor(cadena);
+		}
+		else if(valor.equals("precio-menor-que")) {
+			listaProductos = ps.buscadorPrecioMenor(cadena);
+		}
+		
+		
+		
+		model.addAttribute("listaProductos", listaProductos);
 		session.setAttribute("listaCategorias", cs.listadoCategorias());//creo la lista de categorias en el inicio
 		Usuario usuario = null;
 		
@@ -52,8 +70,8 @@ public class ProductoController {
 			session.setAttribute("opcionesMenu", oms.listadoOpcionesIdRol(usuario.getIdRol()));
 		}
 		
-		//Si el usuario es null es anonimo
-		if(usuario == null) {
+		//Si el usuario es null es anonimo y 3 es cliente
+		if((usuario == null) || (usuario.getIdRol() == 3)) {
 			return "producto/lista";
 		}
 		else if((usuario.getIdRol() == 1) || (usuario.getIdRol() == 2)) {
