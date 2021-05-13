@@ -45,7 +45,7 @@ public class UsuarioController {
 		model.addAttribute("usuario", usuario);
 //		model.addAttribute("clave", clave);
 
-		return "usuario/editar-perfil";
+		return "/usuario/editar-perfil";
 	}
 	
 	@PostMapping("/perfil/editar/enviar")
@@ -68,7 +68,7 @@ public class UsuarioController {
 			return "redirect:/";
 		}
 		else {
-			return "usuario/tabla";	
+			return "/usuario/tabla";	
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class UsuarioController {
 			return "redirect:/";
 		}
 		else {
-			return "usuario/tabla";	
+			return "/usuario/tabla";	
 		}
 	}
 	
@@ -92,7 +92,7 @@ public class UsuarioController {
 		model.addAttribute("listaRoles", rs.listadoRoles());
 		model.addAttribute("usuario", new Usuario());
 		
-		return "usuario/nuevo";
+		return "/usuario/nuevo";
 	}
 	
 	@PostMapping("/nuevo_usuario/enviar")

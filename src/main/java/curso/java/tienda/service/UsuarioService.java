@@ -67,8 +67,6 @@ public class UsuarioService {
 	}
 	
 	public void actualizarUsuario(Usuario usuario) {
-		
-		
 		repository.save(usuario);
 	}
 	

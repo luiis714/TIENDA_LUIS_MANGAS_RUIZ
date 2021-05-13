@@ -7,4 +7,5 @@ import curso.java.tienda.model.Producto;
 
 public interface ConfiguracionRepository extends CrudRepository<Configuracion, Integer>{
 	Configuracion findByClave(String clave);
+	Configuracion findById(int id);
 }

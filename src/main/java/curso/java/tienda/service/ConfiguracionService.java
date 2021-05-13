@@ -24,4 +24,18 @@ public class ConfiguracionService {
 	public void actualizaCofiguracion(Configuracion configuracion) {
 		repository.save(configuracion);
 	}
+
+	public Configuracion devuelveConfiguracionId(int id) {
+		return repository.findById(id);
+	}
+
+	public void actualizarConfiguracion(Configuracion configuracion) {
+		repository.save(configuracion);
+		
+	}
+
+	public void nuevaConfiguracion(Configuracion configuracion) {
+		repository.save(configuracion);
+		
+	}
 }

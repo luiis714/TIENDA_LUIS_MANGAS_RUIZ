@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nueva configuracion</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+	<header th:include="fragments/header.html"></header>
+
+	<form method="post" class="h4 form-horizontal" th:action="@{/configuracion/nuevo/enviar}" th:object="${configuracion}">
+		<fieldset>
+
+			<!-- Form Name -->
+			<legend class="h1 center">Nueva configuración</legend>
+			
+			<input id="id" name="id" type="hidden" th:value="${configuracion.id}">
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="clave">Clave</label>
+				<div class="col-md-4">
+					<input id="clave" th:field="*{clave}" name="clave" type="text"
+						placeholder="" class="form-control input-md" required=""
+						th:value="${configuracion.clave}">
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="valor">Valor</label>
+				<div class="col-md-4">
+					<input id="valor" th:field="*{valor}" name="valor" type="text"
+						placeholder="" class="form-control input-md" required=""
+						th:value="${configuracion.valor}">
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="tipo">Tipo</label>
+				<div class="col-md-4">
+					<input id="tipo" name="tipo" type="text"
+						placeholder="" class="form-control input-md" required=""
+						th:value="${configuracion.tipo}">
+				</div>
+			</div>
+			
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="singlebutton"></label>
+				<div class="col-md-4">
+					<button id="singlebutton" name="singlebutton"
+						class="btn btn-info btn-lg btn-block">Nueva</button>
+				</div>
+			</div>
+
+		</fieldset>
+		
+		
+	</form>
+	
+	<footer th:include="fragments/footer.html"></footer>
+</body>
+</html>

@@ -18,6 +18,7 @@ import curso.java.tienda.model.Pedido;
 import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.DetallesPedidoService;
+import curso.java.tienda.service.PdfService;
 import curso.java.tienda.service.PedidoService;
 import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.UsuarioService;
@@ -34,6 +35,8 @@ public class PedidoController {
 	private UsuarioService us;
 	@Autowired
 	private DetallesPedidoService dps;
+	@Autowired
+	private PdfService pdf;
 	
 	
 	@PostMapping("/nuevo")
@@ -128,4 +131,15 @@ public class PedidoController {
 		
 		return "redirect:/pedido/tabla";
 	}
+	
+	//Procede a enviar el pedido a través del empleado
+	@GetMapping("/factura/{id}")
+	public String descargarFactura(Model model,HttpSession session, @PathVariable("id") Integer id) {
+		Pedido pedido = peds.devuelvePedidoId(id);
+		
+		pdf.escribirPdf(pedido);
+		
+		return "redirect:/pedido/tabla";
+	}
+	
 }

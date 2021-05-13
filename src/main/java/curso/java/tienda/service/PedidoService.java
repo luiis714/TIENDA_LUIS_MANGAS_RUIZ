@@ -81,4 +81,10 @@ public class PedidoService {
 		
 		return "" + year + month + v;
 	}
+	
+	public void borraPedidoIdUsuario(int idUsuario) {
+		
+		repository.deleteAllByIdUsuario(idUsuario);
+		
+	}
 }

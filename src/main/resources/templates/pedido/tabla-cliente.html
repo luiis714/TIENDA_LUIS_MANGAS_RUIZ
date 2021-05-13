@@ -61,6 +61,12 @@
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                                             </span>
                                         </a>
+                                        <a th:if="${pedido.estado == 'enviado'}" th:href="@{/pedido/factura/{id} (id=${pedido.id})}" class="table-link sucess">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-file-pdf-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
