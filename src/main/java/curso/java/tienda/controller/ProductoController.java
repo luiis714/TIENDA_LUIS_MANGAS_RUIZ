@@ -9,6 +9,8 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import curso.java.tienda.TiendaLuisMangasRuizApplication;
 import curso.java.tienda.model.Pedido;
 import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
@@ -32,6 +35,8 @@ import curso.java.tienda.service.ProductoService;
 @Controller
 @RequestMapping("")
 public class ProductoController {
+	
+	private static Logger logger = LogManager.getLogger(ProductoController.class);
 	
 	@Autowired
 	private ProductoService ps;
@@ -47,38 +52,49 @@ public class ProductoController {
 		
 		Iterable<Producto> listaProductos = null;
 		
+		
 		if(cadena.equals("")) {
+			logger.info("Saca todo el listado de productos");
 			listaProductos = ps.listadoProductos();
 		}
 		else if(valor.equals("nombre")){
+			logger.info("Saca lo introducido en el campo de busqueda, a través del nombre");
 			listaProductos = ps.buscadorNombre(cadena);
 		}
 		else if(valor.equals("precio-mayor-que")) {
+			logger.info("Saca los productos que tengan mayor precio al introducido");
 			listaProductos = ps.buscadorPrecioMayor(cadena);
 		}
 		else if(valor.equals("precio-menor-que")) {
+			logger.info("Saca los productos que tengan menor precio al introducido");
 			listaProductos = ps.buscadorPrecioMenor(cadena);
 		}
 		
+		logger.info("Pasa a la vista los productos");		
 		model.addAttribute("listaProductos", listaProductos);
 		session.setAttribute("listaCategorias", cs.listadoCategorias());//creo la lista de categorias en el inicio
 		Usuario usuario = null;
 		
 		//Si es null es anónimo
 		if(session.getAttribute("usuario") == null) {
+			logger.info("El usuario es anonimo");	
 			session.setAttribute("opcionesMenu", oms.listadoOpcionesIdRol(4));	
 		}
 		else {
+			
 			//Si no es null es que esta logueado
 			usuario = (Usuario) session.getAttribute("usuario");
+			logger.info("El usurio esta registrado " + usuario.toString());
 			session.setAttribute("opcionesMenu", oms.listadoOpcionesIdRol(usuario.getIdRol()));
 		}
 		
 		//Si el usuario es null es anonimo y 3 es cliente
 		if((usuario == null) || (usuario.getIdRol() == 3)) {
+			logger.info("El usuario es anonimo o cliente");
 			return "producto/lista";
 		}
 		else if((usuario.getIdRol() == 1) || (usuario.getIdRol() == 2)) {
+			logger.info("El usuario es admin o empleado");
 			//Si es empleado a admin entra directamente en tabla productos y no en lista
 			return "redirect:/tabla";
 		} else {
@@ -91,10 +107,12 @@ public class ProductoController {
 	@GetMapping("/tabla")
 	public String tabla(Model model, HttpSession session) {
 		//Añado lista de productos
+		logger.info("Se cargan en el modelo el listado de productos y de categorias");
 		model.addAttribute("listaProductos", ps.listadoProductos());
 		model.addAttribute("listaCategorias", cs.listadoCategorias());
 		
 		if(session.getAttribute("usuario") == null) {
+			logger.info("Se acabó la sesión, se redirige al inicio");
 			return "redirect:/";
 		}
 		else {
@@ -107,6 +125,7 @@ public class ProductoController {
 	public String detalle(Model model,HttpSession session, @PathVariable("id") Integer id) {
 		
 		Producto producto = ps.getProductoId(id);
+		logger.info("Se ha entrado en el detalle del producto " + producto.toString());
 		
 		model.addAttribute("producto", producto);
 		model.addAttribute("listaCategorias", cs.listadoCategorias());
@@ -148,6 +167,7 @@ public class ProductoController {
 				//throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
 		}
 		
+		logger.info("Se ha creado un producto nuevo " + producto.toString());
 		ps.nuevoProducto(producto);
 		model.addAttribute("listaCategorias", cs.listadoCategorias());
 		
@@ -189,7 +209,7 @@ public class ProductoController {
 				//throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
 		}
 		
-		
+		logger.info("Se ha editado un producto " + producto);
 		ps.actualizarProducto(producto);
 		model.addAttribute("listaCategorias", cs.listadoCategorias());
 		
@@ -198,15 +218,15 @@ public class ProductoController {
 	
 	@GetMapping("/borrar_producto/{id}")
 	public String borrar(Model model,HttpSession session, @PathVariable("id") Integer id) {
-
+		logger.info("Se ha borrado el producto con id " + id);
 		ps.borrarProducto(id);
 		
 		return "redirect:/";
 	}
 	
-	
 	@GetMapping("/carro")
 	public String carro(HttpSession session, Model model) {
+		logger.info("Se ha entrado en el carrito");
 		
 		ArrayList<Producto> carro = null;
 		//Si el carro no está creado, lo creo para evitar errores
