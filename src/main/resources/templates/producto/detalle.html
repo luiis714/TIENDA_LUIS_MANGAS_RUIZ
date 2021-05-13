@@ -33,7 +33,7 @@
 			              <br>
 			              <div class="product_meta" th:each="categoria : ${listaCategorias}">
 			              	<span th:if="${producto.idCategoria == categoria.id}" class="posted_in"> <strong>Categoria:</strong>
-			                  	<a rel="tag" th:href="@{/categoria/}+${categoria.nombre.toLowerCase()}" th:text="${categoria.nombre}">Jackets</a>.
+			                  	<a rel="tag" th:href="@{/categoria/{id} (id=${categoria.id})}" th:text="${categoria.nombre}">Jackets</a>.
 			              	</span>
 			              </div>
 			              <div class="m-bot15"> <strong>Precio: </strong> <span class="pro-price" th:text="${producto.precio}+€">00.00€</span></div>

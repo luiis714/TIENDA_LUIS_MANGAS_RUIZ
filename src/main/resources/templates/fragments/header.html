@@ -23,17 +23,30 @@
 
 				<div id="main-nav" class="collapse navbar-collapse">
 					<ul class="navbar-nav ml-auto" th:each="opcion : ${session.opcionesMenu}">
-						<div th:if="${opcion.opcion} == 'Categorias'">
+						<div th:unless="${opcion.opcion} == 'Perfil' OR ${opcion.opcion} == 'Categorias'">
+							<li><a class="nav-item nav-link active" th:href="@{${opcion.urlOpcion}}" th:text="${opcion.opcion}"></a></li>
+						</div>
+						
+						<div th:if="${opcion.opcion == 'Categorias'} AND ${opcion.idRol != 1} AND ${opcion.idRol != 2}">
 							<li class="dropdown"><a class="nav-item nav-link active" data-toggle="dropdown" th:text="${opcion.opcion}">default</a>
 								<div class="dropdown-menu">
 									<a th:href="@{/}" class="dropdown-item">Todos los productos</a>
 									<div th:each="categoria : ${session.listaCategorias}">
-										<a th:href="@{/categoria/}+${categoria.nombre.toLowerCase()}" class="dropdown-item" th:text="${categoria.nombre}">default</a>
+										<a th:href="@{/categoria/{id} (id=${categoria.id})}" class="dropdown-item" th:text="${categoria.nombre}">default</a>
 									</div>
 								</div>
 								
 							</li>
 						</div>
+						
+						<div th:if="${opcion.opcion == 'Categorias'} AND ${opcion.idRol == 1}">
+							<li><a class="nav-item nav-link active" th:href="@{${opcion.urlOpcion}}" th:text="${opcion.opcion}"></a></li>
+						</div>
+						<div th:if="${opcion.opcion == 'Categorias'} AND ${opcion.idRol == 2}">
+							<li><a class="nav-item nav-link active" th:href="@{${opcion.urlOpcion}}" th:text="${opcion.opcion}"></a></li>
+						</div>
+						
+						
 						<div th:if="${opcion.opcion} == 'Perfil'">
 							<li class="dropdown"><a class="nav-item nav-link active" data-toggle="dropdown" th:text="${session.usuario.email}">default</a>								
 								<div class="dropdown-menu">
@@ -45,9 +58,7 @@
 							</li>
 						</div>
 						
-						<div th:unless="${opcion.opcion} == 'Perfil' OR ${opcion.opcion} == 'Categorias'">
-							<li><a class="nav-item nav-link active" th:href="@{${opcion.urlOpcion}}" th:text="${opcion.opcion}"></a></li>
-						</div>
+
 					</ul>
 				</div>
 			</div>
