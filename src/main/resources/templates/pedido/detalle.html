@@ -86,6 +86,30 @@ background:#eee;
 												<span class="small" th:text="${usuario.nombre} + ' ' + ${usuario.apellido1} + ' ' + ${usuario.apellido2}"></span>
 											</address>
 										</div>
+										<div class="col-xs-6 text-right">
+										<address>
+											<div th:each="config : ${session.configuraciones}">
+												<strong th:if="${config.clave == 'nombreTienda'}" th:text="${config.valor}">Billed To:</strong>
+												<span th:if="${config.clave == 'cif'}" class="small"  th:text="${config.valor}"></span>
+												<span class="small" th:if="${config.clave == 'direccion'}" th:text="${config.valor}"></span>
+												<span class="small" th:if="${config.clave == 'ciudad'}" th:text="${config.valor}"></span>
+											</div>
+											
+										</address>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+										<address>
+											<strong>Estado:</strong><br>
+											<span th:text="${pedido.estado}"></span>
+											<br><br>
+											<div th:if="${pedido.estado == 'enviado'}">
+												<strong>Nº Factura:</strong><br>
+												<span th:text="${pedido.numFactura}"></span>
+											</div>
+										</address>
+										</div>
+									</div>
 									</div>
 									<div class="row">
 									
@@ -103,19 +127,7 @@ background:#eee;
 											</address>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-xs-12 text-right">
-										<address>
-											<strong>Estado:</strong><br>
-											<span th:text="${pedido.estado}"></span>
-											<br><br>
-											<div th:if="${pedido.estado == 'enviado'}">
-												<strong>Nº Factura:</strong><br>
-												<span th:text="${pedido.numFactura}"></span>
-											</div>
-										</address>
-										</div>
-									</div>
+									
 									
 									<div class="row">
 										<div class="col-md-12">

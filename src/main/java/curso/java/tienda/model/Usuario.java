@@ -23,15 +23,16 @@ public class Usuario {
 	@Column(unique = true)
 	private String email;
 
+	@NotBlank(message="La clave es obligatoria")
 	private String clave;
 	
 	@NotBlank(message="El nombre es obligatorio")
 	private String nombre;
 	
-	@NotBlank(message="Los apellidos son obligatorios")
+	@NotBlank(message="El primer apellido es obligatorio")
 	private String apellido1;
 	
-	@NotBlank(message="Los apellidos son obligatorios")
+	@NotBlank(message="El segundo apellido es obligatorio")
 	private String apellido2;
 	
 	private String direccion;
@@ -40,7 +41,7 @@ public class Usuario {
 	
 	private String provincia;
 	
-	@Size(min=9, max=9, message="El teléfono debe tener 9 dígitos")
+//	@Size(min=9, max=9, message="El teléfono debe tener 9 dígitos")
 	private String telefono;
 	
 	private String dni;

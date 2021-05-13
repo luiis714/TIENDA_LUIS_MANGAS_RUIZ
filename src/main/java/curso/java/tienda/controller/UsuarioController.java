@@ -1,10 +1,12 @@
 package curso.java.tienda.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -86,6 +88,18 @@ public class UsuarioController {
 		}
 	}
 	
+	@GetMapping("/nuevo_cliente")
+	public String nuevoCliente(Model model,HttpSession session) {
+		//Creo un nuevo cliente
+		model.addAttribute("listaRoles", rs.listadoRoles());
+		
+		Usuario usuario = new Usuario();
+		usuario.setIdRol(3);//Id de cliente
+		model.addAttribute("usuario", usuario);
+		
+		return "/usuario/nuevo";
+	}
+	
 	@GetMapping("/nuevo_usuario")
 	public String nuevo(Model model,HttpSession session) {
 		//Creo un nuevo cliente
@@ -126,11 +140,18 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/editar_usuario/enviar")
-	public String editarSubmit(Model model, @ModelAttribute Usuario usuario) {
+	public String editarSubmit(Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "/usuario/editar_usuario/{id}"+usuario.getId();
+		}
+		else {
+			uS.actualizarUsuario(usuario);
+			
+			return "redirect:/";
+		}
 		
-		uS.actualizarUsuario(usuario);
 		
-		return "redirect:/";
+		
 	}
 	
 	@GetMapping("/borrar_cliente/{id}")

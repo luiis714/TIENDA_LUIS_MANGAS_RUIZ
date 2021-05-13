@@ -13,7 +13,13 @@
 	<header class="header-area overlay bg-info" th:fragment="header">
 		<nav class="navbar navbar-expand-md navbar-dark">
 			<div class="container">
-				<a th:href="@{/}" class="navbar-brand">Luis.com</a>
+				
+				
+				<div th:each="config : ${session.configuraciones}">
+					<a th:if="${config.clave == 'nombreTienda'}"  th:href="@{/}" class="navbar-brand" th:text="${config.valor}">Luis.com</a>								
+				</div>
+											
+				
 
 				<button type="button" class="navbar-toggler collapsed bg-info"
 					data-toggle="collapse" data-target="#main-nav">

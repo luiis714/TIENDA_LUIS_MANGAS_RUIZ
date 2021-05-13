@@ -28,6 +28,7 @@ import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.repository.ProductoRepository;
 import curso.java.tienda.service.CategoriaService;
+import curso.java.tienda.service.ConfiguracionService;
 import curso.java.tienda.service.MetodoPagoService;
 import curso.java.tienda.service.OpcionMenuService;
 import curso.java.tienda.service.ProductoService;
@@ -46,12 +47,13 @@ public class ProductoController {
 	private OpcionMenuService oms;
 	@Autowired
 	private MetodoPagoService mps;
+	@Autowired
+	private ConfiguracionService config;
 	
 	@GetMapping("")
 	public String inicio(Model model, HttpSession session, @RequestParam(name="buscar", required=false, defaultValue="") String cadena, @RequestParam(name="valor", required=false, defaultValue="nombre") String valor) {
 		
 		Iterable<Producto> listaProductos = null;
-		
 		
 		if(cadena.equals("")) {
 			logger.info("Saca todo el listado de productos");
@@ -73,6 +75,7 @@ public class ProductoController {
 		logger.info("Pasa a la vista los productos");		
 		model.addAttribute("listaProductos", listaProductos);
 		session.setAttribute("listaCategorias", cs.listadoCategorias());//creo la lista de categorias en el inicio
+		session.setAttribute("configuraciones", config.listadoConfiguraciones());//Añado listado de configuraciones a la sesion
 		Usuario usuario = null;
 		
 		//Si es null es anónimo
