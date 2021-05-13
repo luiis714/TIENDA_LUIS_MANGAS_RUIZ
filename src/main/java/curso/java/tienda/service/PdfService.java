@@ -28,7 +28,7 @@ public class PdfService {
 		
 		try {      
 	    	//Obtenemos la instancia del archivo a utilizar
-	    	writer = PdfWriter.getInstance(documento, new FileOutputStream("./ficheros/factura"+ pedido.getNumFactura() +".pdf"));
+	    	writer = PdfWriter.getInstance(documento, new FileOutputStream("C:\\Users\\Formacion\\Desktop\\ficheros\\"+ pedido.getNumFactura() +".pdf"));
 	    	
 		    //Para insertar cabeceras/pies en todas las p�ginas
 //	    	writer.setPageEvent(new PDFHeaderFooter());
@@ -39,8 +39,9 @@ public class PdfService {
 		    //PARRAFOS
 			Paragraph paragraph = new Paragraph();
 
-			paragraph.add(pedido.toString()+"\n\n");
+			paragraph.add("Nº Factura: "+ pedido.getNumFactura() + "\n\n");
 		    
+			paragraph.add("Fecha: "+ pedido.getFecha() + "\n\n");
 	    	documento.add(paragraph);
 	    	
 	    	//TABLAS
@@ -48,14 +49,18 @@ public class PdfService {
 			//Instanciamos una tabla de X columnas
 		    PdfPTable tabla = new PdfPTable(2);
 		    
-		    Phrase texto = new Phrase("cabecera");
-			PdfPCell cabecera = new PdfPCell(texto);
+		    Phrase texto1 = new Phrase("Producto");
+		    Phrase texto2 = new Phrase("Precio (€)");
+			PdfPCell cabecera1 = new PdfPCell(texto1);
+			PdfPCell cabecera2 = new PdfPCell(texto2);
 			
-			cabecera.setBackgroundColor(BaseColor.LIGHT_GRAY);
-			cabecera.setBorderWidth(1);
-		    
-		    tabla.addCell(cabecera);
-		    tabla.addCell(cabecera);
+			cabecera1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			cabecera1.setBorderWidth(1);
+			cabecera2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			cabecera2.setBorderWidth(1);
+			
+		    tabla.addCell(cabecera1);
+		    tabla.addCell(cabecera2);
 		    tabla.addCell("3");
 		    tabla.addCell("4");
 		    tabla.addCell("5");
@@ -67,7 +72,7 @@ public class PdfService {
 		    
 		    
 		    try {
-		        File path = new File("./ficheros/factura"+ pedido.getNumFactura() +".pdf");
+		        File path = new File("C:\\Users\\Formacion\\Desktop\\ficheros\\"+ pedido.getNumFactura() +".pdf");
 		        Desktop.getDesktop().open(path);
 		    } catch (IOException ex) {
 		        ex.printStackTrace();

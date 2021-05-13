@@ -139,7 +139,7 @@ public class PedidoController {
 		
 		pdf.escribirPdf(pedido);
 		
-		return "redirect:/pedido/tabla";
+		return "redirect:/pedido/historial";
 	}
 	
 }
