@@ -54,8 +54,6 @@ public class ProductoController {
 			listaProductos = ps.buscadorPrecioMenor(cadena);
 		}
 		
-		
-		
 		model.addAttribute("listaProductos", listaProductos);
 		session.setAttribute("listaCategorias", cs.listadoCategorias());//creo la lista de categorias en el inicio
 		Usuario usuario = null;

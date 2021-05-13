@@ -16,6 +16,7 @@ import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.RolService;
 import curso.java.tienda.service.UsuarioService;
+import curso.java.tienda.service.VariosService;
 
 @Controller
 @RequestMapping("/usuario")
@@ -25,12 +26,36 @@ public class UsuarioController {
 	private UsuarioService uS;
 	@Autowired
 	private RolService rs;
+	@Autowired
+	private VariosService vs;
 	
 	@GetMapping("/perfil")
 	public String perfil() {
 		
 		return "/usuario/perfil";
 //		return "redirect:/tienda_luis_mangas_ruiz";
+	}
+	
+	@GetMapping("/perfil/editar/{id}")
+	public String editarPerfil(Model model, @PathVariable("id") Integer id) {
+		
+		Usuario usuario= uS.devuelveUsuarioId(id);
+		
+//		String clave = vs.desencriptarClave(usuario.getClave());
+		model.addAttribute("usuario", usuario);
+//		model.addAttribute("clave", clave);
+
+		return "usuario/editar-perfil";
+	}
+	
+	@PostMapping("/perfil/editar/enviar")
+	public String editarPerfilSubmit(Model model, HttpSession session, @ModelAttribute Usuario usuario) {
+		
+		uS.actualizarUsuario(usuario);
+		//Lo meto en sesion cuando termino de editarlo para que quede constracia en la session
+		session.setAttribute("usuario", usuario);
+		
+		return "redirect:/usuario/perfil";
 	}
 	
 	@GetMapping("/cliente/tabla")

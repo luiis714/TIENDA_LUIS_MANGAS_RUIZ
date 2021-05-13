@@ -122,7 +122,7 @@ public class PedidoController {
 	public String enviar(Model model,HttpSession session, @PathVariable("id") Integer id) {
 		
 		Pedido pedido = peds.devuelvePedidoId(id);
-		pedido.setEstado("enviado");//cancelar pendiente es que todavía no está cancelado
+		pedido.setEstado("enviado");//enviar pendiente es que todavía no está cancelado
 		pedido.setNumFactura(peds.sacaNumFactura()); //Pongo el numero de factura una vez se ha enviado
 		peds.actualizaPedido(pedido);
 		
