@@ -8,7 +8,7 @@
 <body>
 	<header th:include="fragments/header.html"/>
 
-	<form method="post" class="h4 form-horizontal" th:action="@{/nuevo/enviar}" th:object="${producto}">
+	<form enctype="multipart/form-data" method="post" class="h4 form-horizontal" th:action="@{/nuevo/enviar}" th:object="${producto}">
 		<fieldset>
 
 			<!-- Form Name -->
@@ -91,7 +91,15 @@
 
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="nombre">Imagen</label>  
+			  	<div class="col-md-4">
+					<input id="file" name="file" type="file" placeholder="" class="form-control input-md">
 
+			  	</div>
+			</div>
+				
 			<!-- Button -->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="singlebutton"></label>

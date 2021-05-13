@@ -21,7 +21,7 @@
 					<!-- Restaurant Item -->
 					<div class="item">
 						<!-- Item's image -->
-						<a th:href="@{/detalle/{id} (id=${producto.id})}"><img class="img-responsive"  th:src="@{/img/producto/producto1.jpg}" alt=""></a>
+						<a th:href="@{/detalle/{id} (id=${producto.id})}"><img class="img-responsive"  th:src="@{/img/producto/} + ${producto.imagen}" alt=""></a>
 						<!-- Item details -->
 						<div class="item-dtls">
 							<!-- product title -->

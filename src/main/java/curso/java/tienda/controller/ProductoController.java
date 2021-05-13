@@ -1,6 +1,11 @@
 package curso.java.tienda.controller;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import curso.java.tienda.model.Pedido;
 import curso.java.tienda.model.Producto;
@@ -117,17 +123,41 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/nuevo/enviar")
-	public String nuevoSubmit(Model model, @ModelAttribute Producto producto) {
+	public String nuevoSubmit(Model model, @ModelAttribute Producto producto, @RequestParam("file") MultipartFile file) {
+		producto.setFechaAlta(new Date()); //guarda la fecha actual
+		
+		try {
+			if(!file.isEmpty()) {
+				producto.setImagen(file.getOriginalFilename());
+				
+				ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			    URL appResourceURL = loader.getResource("static");
+			    String dbConfigFileRoute = appResourceURL.getPath();
+			    dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
+
+			    //String ruta = "C:\\" + file.getOriginalFilename(); //
+			    String ruta = dbConfigFileRoute + "/img/producto/" + file.getOriginalFilename();
+			    
+			    //guardar en el fichero
+			    Files.copy(file.getInputStream(), Paths.get(ruta));
+			    
+			    System.out.println(dbConfigFileRoute);
+			}
+		} catch (IOException e) {
+				System.out.println(e);
+				//throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
+		}
+		
 		ps.nuevoProducto(producto);
 		model.addAttribute("listaCategorias", cs.listadoCategorias());
 		
-		return "redirect:/";
+		return "redirect:/tabla";
 	}
 	
 	@GetMapping("/editar_producto/{id}")
 	public String editar(Model model, @PathVariable("id") Integer id) {
-		
 		Producto producto = ps.getProductoId(id);
+		
 		
 		model.addAttribute("producto", producto);
 		model.addAttribute("listaCategorias", cs.listadoCategorias());//Listado para escoger la categoriaS
@@ -136,12 +166,34 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/editar/enviar")
-	public String editarSubmit(Model model, @ModelAttribute Producto producto) {
-		ps.actualizarProducto(producto);
+	public String editarSubmit(Model model, @ModelAttribute Producto producto, @RequestParam("file") MultipartFile file) {
+		try {
+			if(!file.isEmpty()) {
+				producto.setImagen(file.getOriginalFilename());
+				
+				ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			    URL appResourceURL = loader.getResource("static");
+			    String dbConfigFileRoute = appResourceURL.getPath();
+			    dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
+
+			    //String ruta = "C:\\" + file.getOriginalFilename(); //
+			    String ruta = dbConfigFileRoute + "/img/producto/" + file.getOriginalFilename();
+			    
+			    //guardar en el fichero
+			    Files.copy(file.getInputStream(), Paths.get(ruta));
+			    
+			    System.out.println(dbConfigFileRoute);
+			}
+		} catch (IOException e) {
+				System.out.println(e);
+				//throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
+		}
 		
+		
+		ps.actualizarProducto(producto);
 		model.addAttribute("listaCategorias", cs.listadoCategorias());
 		
-		return "redirect:/";
+		return "redirect:/tabla";
 	}
 	
 	@GetMapping("/borrar_producto/{id}")

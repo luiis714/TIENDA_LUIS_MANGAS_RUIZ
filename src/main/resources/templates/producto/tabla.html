@@ -33,7 +33,7 @@
 						<tbody id="myTable">
 							<tr th:each="producto : ${listaProductos}">
 								<td>
-									<img th:src="@{img/producto/producto1.jpg}" alt="">
+									<img th:src="@{/img/producto/} + ${producto.imagen}" alt="">
 									<a href="#" class="user-link" th:text="${producto.nombre}"></a>
 									<div th:each="categoria : ${listaCategorias}">
 										<span th:if="${producto.idCategoria == categoria.id}" class="user-subhead"  th:text="${categoria.nombre}"></span>

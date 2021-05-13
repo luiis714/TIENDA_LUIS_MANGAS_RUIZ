@@ -27,6 +27,10 @@ public class Producto {
 	@Column(name = "fecha_baja")
 	private Date fechaBaja;
 	private Float impuesto;
+	
+	private String imagen;
+	
+
 
 	public Producto() {
 
@@ -117,7 +121,21 @@ public class Producto {
 	public void setImpuesto(Float impuesto) {
 		this.impuesto = impuesto;
 	}
+	
+	/**
+	 * @return the imagen
+	 */
+	public String getImagen() {
+		return imagen;
+	}
 
+	/**
+	 * @param imagen the imagen to set
+	 */
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", idCategoria=" + idCategoria + ", nombre=" + nombre + ", descripcion="
