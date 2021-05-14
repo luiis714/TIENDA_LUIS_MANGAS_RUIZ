@@ -37,7 +37,7 @@
 					</select>
 					<select th:if="${session.usuario.idRol == 2}" id="id_rol" th:field="*{idRol}" name="id_rol">
 						<div th:each="rol : ${listaRoles}">
-							<option th:if="${rol.id != 4 AND rol.id != 1}" th:value="${rol.id}" th:text="${rol.rol}"></option>
+							<option th:if="${rol.id == 3}" th:value="${rol.id}" th:text="${rol.rol}"></option>
 						</div>
 					</select>
 				</div>

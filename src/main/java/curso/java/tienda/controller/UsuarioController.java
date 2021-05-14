@@ -163,9 +163,6 @@ public class UsuarioController {
 			
 			return "redirect:/";
 		}
-		
-		
-		
 	}
 	
 	@GetMapping("/borrar_cliente/{id}")
@@ -182,6 +179,14 @@ public class UsuarioController {
 		uS.borrarUsuario(id);
 		
 		return "redirect:/usuario/empleado/tabla";
+	}
+	
+	@GetMapping("/borrar_admin/{id}")
+	public String borrarAdmin(Model model,HttpSession session, @PathVariable("id") Integer id) {
+
+		uS.borrarUsuario(id);
+		
+		return "redirect:/usuario/admin/tabla";
 	}
 	
 	@GetMapping("/cerrar_sesion")

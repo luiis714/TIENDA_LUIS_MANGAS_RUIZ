@@ -87,12 +87,14 @@
 											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
 										</span>
 									</a>
-									<a th:if="${session.usuario.idRol == 1} AND ${usuario.idRol == 1}" th:href="@{/usuario/borrar_admin/{id} (id=${usuario.id})}" class="table-link danger">
-										<span class="fa-stack">
-											<i class="fa fa-square fa-stack-2x"></i>
-											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-										</span>
-									</a>
+									<i th:if="${session.usuario.id != usuario.id}">
+										<a th:if="${session.usuario.idRol == 1} AND ${usuario.idRol == 1}" th:href="@{/usuario/borrar_admin/{id} (id=${usuario.id})}" class="table-link danger">
+											<span class="fa-stack">
+												<i class="fa fa-square fa-stack-2x"></i>
+												<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+											</span>
+										</a>
+									</i>
 								</td>
 							</tr>
 						</tbody>

@@ -1,5 +1,6 @@
 package curso.java.tienda.service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -39,6 +40,11 @@ public class UsuarioService {
 	
 
 	public Iterable<Usuario> listadoAdmin() {
+		//Devuelvo todos los usuarios que tengan el rol 1 de admin
+		return repository.findAllByIdRol(1);
+	}
+	
+	public ArrayList<Usuario> listadoAdminA() {
 		//Devuelvo todos los usuarios que tengan el rol 1 de admin
 		return repository.findAllByIdRol(1);
 	}

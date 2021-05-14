@@ -32,6 +32,7 @@ import curso.java.tienda.service.ConfiguracionService;
 import curso.java.tienda.service.MetodoPagoService;
 import curso.java.tienda.service.OpcionMenuService;
 import curso.java.tienda.service.ProductoService;
+import curso.java.tienda.service.VariosService;
 
 @Controller
 @RequestMapping("")
@@ -41,6 +42,8 @@ public class ProductoController {
 	
 	@Autowired
 	private ProductoService ps;
+	@Autowired
+	private VariosService varios;
 	@Autowired
 	private CategoriaService cs;
 	@Autowired
@@ -52,6 +55,8 @@ public class ProductoController {
 	
 	@GetMapping("")
 	public String inicio(Model model, HttpSession session, @RequestParam(name="buscar", required=false, defaultValue="") String cadena, @RequestParam(name="valor", required=false, defaultValue="nombre") String valor) {
+		//Comprueba si existe el usuario 'admin' y sino lo crea
+		varios.compruebaUsuarioAdmin();
 		
 		Iterable<Producto> listaProductos = null;
 		
