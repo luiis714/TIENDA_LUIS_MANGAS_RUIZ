@@ -20,8 +20,7 @@ import curso.java.tienda.model.Pedido;
 
 @Service
 public class PdfService {
-	
-	
+
 	public void escribirPdf(Pedido pedido) {
 		PdfWriter writer = null;
 		Document documento = new Document(PageSize.A4, 20, 20, 70, 50);
@@ -61,10 +60,10 @@ public class PdfService {
 			
 		    tabla.addCell(cabecera1);
 		    tabla.addCell(cabecera2);
-		    tabla.addCell("3");
-		    tabla.addCell("4");
-		    tabla.addCell("5");
-		    tabla.addCell("6");
+//		    tabla.addCell("3");
+//		    tabla.addCell("4");
+//		    tabla.addCell("5");
+//		    tabla.addCell("6");
 		    documento.add(tabla);
 	    	
 		    documento.close(); //Cerramos el documento

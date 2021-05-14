@@ -46,7 +46,7 @@ public class UsuarioService {
 	
 	public ArrayList<Usuario> listadoAdminA() {
 		//Devuelvo todos los usuarios que tengan el rol 1 de admin
-		return repository.findAllByIdRol(1);
+		return (ArrayList<Usuario>) repository.findAllByIdRol(1);
 	}
 	
 	public boolean compruebaUsuario(String email, String clave) {
