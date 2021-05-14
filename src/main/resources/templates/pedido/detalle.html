@@ -135,6 +135,7 @@ background:#eee;
 											<table class="table table-striped">
 												<thead>
 													<tr class="line">
+														<td th:if="${pedido.estado == 'pendiente'}" class="text-center"><strong>#</strong></td>
 														<td class="text-center"><strong>PRODUCTO</strong></td>
 														<td class="text-center"><strong>CANTIDAD</strong></td>
 														<td class="text-right"><strong>PRECIO (€)</strong></td>
@@ -143,7 +144,12 @@ background:#eee;
 												</thead>
 												<tbody>
 													<tr th:each="detalle : ${detallesPedido}">
-														
+				                                        <td>
+					                                        <a th:if="${pedido.estado == 'pendiente'}" th:href="@{/pedido/cancelar_detalle/{id} (id=${detalle.id})}" class="btn btn-danger">
+					                                            <i class="glyphicon glyphicon-trash"></i>
+					                                        </a>
+				                                        </td>
+				                                        
 														<div th:each="producto : ${listaProductos}">
 															<td th:if="${detalle.idProducto == producto.id}"><strong><span th:text="${producto.nombre}">Template Design</span></strong>
 															<br><span class="small" th:text="${producto.descripcion}"></span>

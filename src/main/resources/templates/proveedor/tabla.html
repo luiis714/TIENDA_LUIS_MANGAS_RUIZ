@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-	<title>Tabla productos</title>
+	<title>Tabla categorias</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/css/producto/tabla.css}">
@@ -16,49 +16,53 @@
 			<div class="main-box clearfix">
 				<div class="table-responsive">
 				
-					<a th:href="@{/nuevo_producto}" class="btn btn-info btn-lg">Añadir</a>
+					<a th:href="@{/proveedor/nuevo}" class="btn btn-info btn-lg">Añadir</a>
 					
 					<table class="h4 table table-hover user-list">
 						<thead>
 							<tr>
-								<th><span>Producto</span></th>
-								<th><span>Descripción</span></th>
-								<th><span>Precio (€)</span></th>
-								<th><span>Fecha alta</span></th>
-								<th><span>Impuesto</span></th>
+								<th><span>CIF</span></th>
+								<th><span>Nombre</span></th>
+								<th><span>Dirección</span></th>
+								<th><span>Localidad</span></th>
+								<th><span>Provincia</span></th>
+								<th><span>Teléfono</span></th>
+								<th><span>Email</span></th>
 								<th>&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody id="myTable">
-							<tr th:each="producto : ${listaProductos}">
+							<tr th:each="proveedor : ${listaProveedores}">
 								<td>
-									<img th:src="@{/img/producto/} + ${producto.imagen}" alt="">
-									<a href="#" class="user-link" th:text="${producto.nombre}"></a>
-									<div th:each="categoria : ${listaCategorias}">
-										<span th:if="${producto.idCategoria == categoria.id}" class="user-subhead"  th:text="${categoria.nombre}"></span>
-									</div>
-									
+									<a th:text="${proveedor.cif}"></a>
 								</td>
 								<td>
-									<span th:text="${producto.descripcion}"></span>
-								</td>
-								<td class="text-center">
-									<span th:text="${producto.precio}+'€'"></span>
-								</td>
-								<td class="text-center">
-									<span th:text="${producto.fechaAlta}"></span>
+									<a th:text="${proveedor.nombre}"></a>
 								</td>
 								<td>
-									<span th:text="${producto.impuesto}"></span>
+									<span th:text="${proveedor.direccion}"></span>
 								</td>
+								<td>
+									<span th:text="${proveedor.localidad}"></span>
+								</td>
+								<td>
+									<span th:text="${proveedor.provincia}"></span>
+								</td>
+								<td>
+									<span th:text="${proveedor.telefono}"></span>
+								</td>
+								<td>
+									<span th:text="${proveedor.email}"></span>
+								</td>
+								
 								<td style="width: 10%;">
-									<a th:href="@{/editar_producto/{id} (id = ${producto.id})}" class="table-link">
+									<a th:href="@{/proveedor/editar/{id} (id=${proveedor.id})}" class="table-link">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
 										</span>
 									</a>
-									<a th:if="${session.usuario.idRol == 1}" th:href="@{/borrar_producto/{id} (id=${producto.id})}" class="table-link danger">
+									<a th:href="@{/proveedor/borrar/{id} (id=${proveedor.id})}" class="table-link danger">
 										<span class="fa-stack">
 											<i class="fa fa-square fa-stack-2x"></i>
 											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
@@ -79,7 +83,7 @@
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!-- 	SCRIPT DE PAGINACION -->
-	<script th:src="@{/js/producto/paginacion.js}">
+	<script th:src="@{/js/tabla/paginacion.js}">
 		
 	</script>
 </body>

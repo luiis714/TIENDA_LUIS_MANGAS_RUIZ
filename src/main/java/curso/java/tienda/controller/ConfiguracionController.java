@@ -67,6 +67,8 @@ public class ConfiguracionController {
 		//Inserto el usuario nuevo
 		cs.nuevaConfiguracion(configuracion);
 		
+		
+		
 		return "redirect:/configuracion/tabla";
 	}
 }

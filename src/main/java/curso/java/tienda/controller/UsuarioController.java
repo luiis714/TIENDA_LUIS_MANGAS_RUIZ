@@ -88,6 +88,20 @@ public class UsuarioController {
 		}
 	}
 	
+	@GetMapping("/admin/tabla")
+	public String tablaAdmin(Model model, HttpSession session) {
+		//Añado lista de productos
+		model.addAttribute("listaRoles", rs.listadoRoles());
+		model.addAttribute("listaUsuarios", uS.listadoAdmin());
+		
+		if(session.getAttribute("usuario") == null) {
+			return "redirect:/";
+		}
+		else {
+			return "/usuario/tabla";	
+		}
+	}
+	
 	@GetMapping("/nuevo_cliente")
 	public String nuevoCliente(Model model,HttpSession session) {
 		//Creo un nuevo cliente

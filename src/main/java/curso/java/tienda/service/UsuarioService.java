@@ -32,9 +32,15 @@ public class UsuarioService {
 		return repository.findAllByIdRol(3);
 	}
 	
-	public Object listadoEmpleados() {
+	public Iterable<Usuario> listadoEmpleados() {
 		//Devuelvo todos los usuarios que tengan el rol 2 de empleado
 		return repository.findAllByIdRol(2);
+	}
+	
+
+	public Iterable<Usuario> listadoAdmin() {
+		//Devuelvo todos los usuarios que tengan el rol 1 de admin
+		return repository.findAllByIdRol(1);
 	}
 	
 	public boolean compruebaUsuario(String email, String clave) {
@@ -79,4 +85,5 @@ public class UsuarioService {
 			session.invalidate();
 		}
 	}
+
 }

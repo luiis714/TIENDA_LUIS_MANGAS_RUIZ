@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import curso.java.tienda.model.DetallesPedido;
 import curso.java.tienda.model.Pedido;
 import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
@@ -108,6 +109,22 @@ public class PedidoController {
 		
 		return "redirect:/pedido/historial";
 	}
+
+	//Procede a cancelar un detalle del pedido a través de un cliente
+	@GetMapping("/cancelar_detalle/{id}")
+	public String cancelarDetalle(Model model,HttpSession session, @PathVariable("id") Integer id) {
+		DetallesPedido d = dps.devuelveDetallesId(id);
+		int id_pedido = d.getIdPedido();//saco el id del pedido para redirigir a la misma vista
+		
+		Pedido pedido = peds.devuelvePedidoId(id_pedido);
+		//Resto la cantidad al total del pedido
+		pedido.setTotal(pedido.getTotal()-d.getTotal());
+		//Elimino ese detalle
+		dps.eliminarId(id);
+		
+		return "redirect:/pedido/detalle/"+id_pedido;
+	}
+	
 	
 	//Tramita la cancelación a través del admin
 	@GetMapping("/cancelacion/{id}")

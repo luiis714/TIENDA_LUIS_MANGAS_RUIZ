@@ -47,7 +47,10 @@
 									<div class="account-block rounded-right">
 										<div class="overlay rounded-right"></div>
 										<div class="account-testimonial">
-											<h4 class="text-white mb-4">Luis.com</h4>
+											<div th:each="config : ${session.configuraciones}">
+												<h1 th:if="${config.clave == 'nombreTienda'}" class="text-white mb-4" th:text="${config.valor}">Luis.com</h1>								
+											</div>
+											
 											<p class="lead text-white">"Una web increible"</p>
 											<p>- Luis Mangas</p>
 										</div>

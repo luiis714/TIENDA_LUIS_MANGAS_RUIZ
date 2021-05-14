@@ -40,4 +40,13 @@ public class DetallesPedidoService {
 	public Iterable<DetallesPedido> devuelveDetallesIdPedido(int idPedido){
 		return repository.findAllByIdPedido(idPedido);
 	}
+
+	public void eliminarId(Integer id) {
+		repository.deleteById(id);
+		
+	}
+
+	public DetallesPedido devuelveDetallesId(int id) {
+		return repository.findById(id);
+	}
 }
